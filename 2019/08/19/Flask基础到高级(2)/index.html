@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-cn,en,default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,Python-Flask," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="The-Flask-Mega-Tutorial-zh 中文翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask基础到高级(2)">
+<meta property="og:url" content="http://118.24.110.138/2019/08/19/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(2)/index.html">
+<meta property="og:site_name" content="Empty2081 Blog">
+<meta property="og:description" content="The-Flask-Mega-Tutorial-zh 中文翻译">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://118.24.110.138/2019/08/19/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(2)/1.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4961528-ed3d140cd60c7d2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4961528-2d5ed4ead77f74ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2019-08-19T03:53:30.000Z">
+<meta property="article:modified_time" content="2019-10-21T13:38:28.000Z">
+<meta property="article:author" content="Empty2081">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Python-Flask">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://118.24.110.138/2019/08/19/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(2)/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://118.24.110.138/2019/08/19/Flask基础到高级(2)/"/>
+
+
+
+
+
+  <title>Flask基础到高级(2) | Empty2081 Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Empty2081 Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://118.24.110.138/2019/08/19/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empty2081">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/EnderMan.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Empty2081 Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flask基础到高级(2)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-19T11:53:30+08:00">
+                2019-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python3/" itemprop="url" rel="index">
+                    <span itemprop="name">Python3</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <!--<span class="post-meta-item-text">Words count in article&#58;</span>-->
+                  <span class="post-meta-item-text">本篇共 &#58;</span>
+                
+                <!--<span title="Words count in article">-->
+                <span>
+                  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <!--<span class="post-meta-item-text">Reading time &asymp;</span>-->
+                  <span class="post-meta-item-text">预计阅读 &asymp;</span>
+                
+                <!--<span title="Reading time">-->
+                <span>
+                  分钟
+                </span>
+              
+            </div>
+          
+
+          <!--
+              <div class="post-description">
+                  The-Flask-Mega-Tutorial-zh 中文翻译
+              </div<
+          -->
+          
+	          <div class="post-description">
+	        	<div style="font-size:12px;" id="hitokoto"></div>
+	        	<i style="margin: auto auto auto 30%;font-size:11px;" id="hitofrom"></i>
+	          </div>
+			  <script>
+			  fetch('https://v1.hitokoto.cn')
+				.then(function(res) {
+				  return res.json();
+				})
+				.then(function (data){
+				  var hitokoto = document.getElementById("hitokoto");
+				  hitokoto.innerText = data.hitokoto;
+				  var hitofrom = document.getElementById("hitofrom");
+				  hitofrom.innerText = "--" + data.from;
+				})
+			  </script>
+			
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+
+      
+        <hr>
+<p>本文翻译自 <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ii-templates" target="_blank" rel="noopener">The Flask Mega-Tutorial Part II: Templates</a></p>
+<p>在Flask Mega-Tutorial系列的第二部分中，我将讨论如何使用<em>模板</em>。</p>
+<p>学习完<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/blob/master/docs/%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9AHello%2C%20World!.md" target="_blank" rel="noopener">第一章</a>之后，你已经拥有了一个虽然简单，但是可以成功运行Web应用，它的文件结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">microblog\</span><br><span class="line">  venv\</span><br><span class="line">  app\</span><br><span class="line">    __init__.py</span><br><span class="line">    routes.py</span><br><span class="line">  microblog.py</span><br></pre></td></tr></table></figure>
+
+<p>在终端会话中设置环境变量<code>FLASK_APP=microblog.py</code>，然后执行<code>flask run</code>命令来运行应用。 包含这个应用的Web服务启动之后，你可以通过在Web浏览器的地址栏中键入URL <em><a href="http://localhost:5000/" target="_blank" rel="noopener">http://localhost:5000/</a></em> 来验证。</p>
+<p>本章将沿用这个应用，在此之上，你将学习如何生成包含复杂结构和诸多动态组件的网页。如果对这个应用和相关开发流程有所遗忘，请回顾<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/blob/master/docs/%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9AHello%2C%20World!.md" target="_blank" rel="noopener">第一章</a>。</p>
+<p><em>本章的GitHub链接为：<a href="https://github.com/miguelgrinberg/microblog/tree/v0.2" target="_blank" rel="noopener">Browse</a>, <a href="https://github.com/miguelgrinberg/microblog/archive/v0.2.zip" target="_blank" rel="noopener">Zip</a>, <a href="https://github.com/miguelgrinberg/microblog/compare/v0.1...v0.2" target="_blank" rel="noopener">Diff</a>.</em></p>
+<h2 id="什么是模板？"><a href="#什么是模板？" class="headerlink" title="什么是模板？"></a>什么是模板？</h2><p>我设计的微博应用程序的主页会有一个欢迎用户的标题。虽然目前的应用程序还没有实现用户概念，但这不妨碍我使用一个Python字典来<em>模拟</em>一个用户，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user = &#123;<span class="string">'username'</span>: <span class="string">'Miguel'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建模拟对象是一项实用的技术，它可以让你专注于应用程序的一部分，而无需为系统中尚不存在的其他部分分心。 在设计应用程序主页的时候，我可不希望因为没有一个用户系统来分散我的注意力，因此我使用了模拟用户对象，来继续接下来的工作。</p>
+<p>原先的视图函数返回简单的字符串，我现在要将其扩展为包含完整HTML页面元素的字符串，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> app</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="meta">@app.route('/index')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    user = &#123;<span class="string">'username'</span>: <span class="string">'Miguel'</span>&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'''</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line"><span class="string">    &lt;head&gt;</span></span><br><span class="line"><span class="string">        &lt;title&gt;Home Page - Microblog&lt;/title&gt;</span></span><br><span class="line"><span class="string">    &lt;/head&gt;</span></span><br><span class="line"><span class="string">    &lt;body&gt;</span></span><br><span class="line"><span class="string">        &lt;h1&gt;Hello, '''</span> + user[<span class="string">'username'</span>] + <span class="string">'''!&lt;/h1&gt;</span></span><br><span class="line"><span class="string">    &lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;'''</span></span><br></pre></td></tr></table></figure>
+
+<p>对HTML标记语言不熟悉的话，建议阅读一下Wikipedia上的简介<a href="https://en.wikipedia.org/wiki/HTML#Markup" target="_blank" rel="noopener">HTML Markup</a></p>
+<p>利用上述的代码更新这个视图函数，然后再次在浏览器打开它的URL看看结果。</p>
+<p><img src="1.png" alt="模拟用户"></p>
+<p>如果我说这个函数返回HTML的方式并不友好的话，你可能会觉得诧异。设想一下，当这个视图函数中的用户和博客不断变化时，里面的代码将会变得多么的复杂。应用的视图函数及其关联的URL也会持续增长。如果哪天我决定更改这个应用的布局，那就不得不更新每个视图函数的HTML字符串。显然，随着应用的扩张，这种方式完全不可行。</p>
+<p>将应用程序的后台逻辑和网页布局划分开来，你不觉得更容易组织管理吗？甚至你可以聘请一位Web设计师来设计一个杀手级的网站前端，而你只需要用Python编写后台应用逻辑。</p>
+<p>模板有助于实现页面展现和业务逻辑之间的分离。 在Flask中，模板被编写为单独的文件，存储在应用程序包内的<em>templates</em>文件夹中。 在确定你在<em>microblog</em>目录后，创建一个存储模板的目录：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ mkdir app/templates</span><br></pre></td></tr></table></figure>
+
+<p>在下面可以看到你的第一个模板，它的功能与上面的<code>index()</code>视图函数返回的HTML页面相似。 把这个文件写在<em>app/templates/index.html</em>中：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>&#123;&#123; title &#125;&#125; - Microblog<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;&#123; user.username &#125;&#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个HTML页面看起来非常简单，唯一值得关注的地方是<code>{{ ... }}</code>。<code>{{ ... }}</code>包含的内容是动态的，只有在运行时才知道具体表示成什么样子。</p>
+<p>网页渲染转移到HTML模板之后，视图函数就能被简化：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> render_template</span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> app</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="meta">@app.route('/index')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    user = &#123;<span class="string">'username'</span>: <span class="string">'Miguel'</span>&#125;</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>, title=<span class="string">'Home'</span>, user=user)</span><br></pre></td></tr></table></figure>
+
+<p>看起来好多了吧？ 赶紧试试这个新版本的应用程序，看看模板是如何工作的。 在浏览器中加载页面后，你需要从浏览器查看HTML源代码并将其与原始模板进行比较。</p>
+<p>将模板转换为完整的HTML页面的操作称为<em>渲染</em>。 为了渲染模板，需要从Flask框架中导入一个名为<code>render_template()</code>的函数。 该函数需要传入模板文件名和模板参数的变量列表，并返回模板中所有占位符都用实际变量值替换后的字符串结果。</p>
+<p><code>render_template()</code>函数调用Flask框架原生依赖的<a href="http://jinja.pocoo.org/" target="_blank" rel="noopener">Jinja2</a>模板引擎。 Jinja2用<code>render_template()</code>函数传入的参数中的相应值替换<code>{{ ... }}</code>块。</p>
+<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><p>在渲染过程中使用实际值替换占位符，只是Jinja2在模板文件中支持的诸多强大操作之一。 模板也支持在<code>{% ... ％}</code>块内使用控制语句。 <em>index.html</em>模板的下一个版本添加了一个条件语句：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        &#123;% if title %&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>&#123;&#123; title &#125;&#125; - Microblog<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome to Microblog!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;&#123; user.username &#125;&#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>现在，模板变得聪明点儿了，如果视图函数忘记给渲染函数传入一个名为<code>title</code>的关键字参数，那么模板将显示一个默认的标题，而不是显示一个空的标题。 你可以通过在视图函数的<code>render_template()</code>调用中去除<code>title</code>参数来试试这个条件语句是如何生效的。</p>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><p>登录后的用户可能想要在主页上查看其他用户的最新动态，针对这个需求，我现在要做的是丰富这个应用来满足它。</p>
+<p>我将会故技重施，使用模拟对象的把戏来创建一些模拟用户和动态：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> render_template</span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> app</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="meta">@app.route('/index')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    user = &#123;<span class="string">'username'</span>: <span class="string">'Miguel'</span>&#125;</span><br><span class="line">    posts = [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">'author'</span>: &#123;<span class="string">'username'</span>: <span class="string">'John'</span>&#125;,</span><br><span class="line">            <span class="string">'body'</span>: <span class="string">'Beautiful day in Portland!'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">'author'</span>: &#123;<span class="string">'username'</span>: <span class="string">'Susan'</span>&#125;,</span><br><span class="line">            <span class="string">'body'</span>: <span class="string">'The Avengers movie was so cool!'</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>, title=<span class="string">'Home'</span>, user=user, posts=posts)</span><br></pre></td></tr></table></figure>
+
+<p>我使用了一个列表来表示用户动态，其中每个元素是一个具有<code>author</code>和<code>body</code>字段的字典。 未来设计用户和其动态时，我将尽可能地保留这些字段名称，以便在使用真实用户和其动态的时候不会出现问题。</p>
+<p>在模板方面，我必须解决一个新问题。 用户动态列表拥有的元素数量由视图函数决定。 那么模板不能对有多少个用户动态进行任何假设，因此需要准备好以通用方式渲染任意数量的用户动态。</p>
+<p>Jinja2提供了<code>for</code>控制结构来应对这类问题：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        &#123;% if title %&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>&#123;&#123; title &#125;&#125; - Microblog<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome to Microblog<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hi, &#123;&#123; user.username &#125;&#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        &#123;% for post in posts %&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; post.author.username &#125;&#125; says: <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123;&#123; post.body &#125;&#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        &#123;% endfor %&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>大道至简，对吧？ 玩玩这个新版本的应用程序，一定要逐步添加更多的内容到用户动态列表，看看模板如何调度以展现视图函数传入的所有用户动态。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4961528-ed3d140cd60c7d2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="模拟用户动态"></p>
+<h2 id="模板的继承"><a href="#模板的继承" class="headerlink" title="模板的继承"></a>模板的继承</h2><p>绝大多数Web应用程序在页面的顶部都有一个导航栏，其中带有一些常用的链接，例如编辑配置文件，登录，注销等。我可以轻松地用HTML标记语言将导航栏添加到<code>index.html</code>模板上，但随着应用程序的增长，我将需要在其他页面重复同样的工作。尽量不要编写重复的代码，这是一个良好的编程习惯，毕竟我真的不想在诸多HTML模板上保留同样的代码。</p>
+<p>Jinja2有一个模板继承特性，专门解决这个问题。从本质上来讲，就是将所有模板中相同的部分转移到一个基础模板中，然后再从它继承过来。</p>
+<p>所以我现在要做的是定义一个名为<code>base.html</code>的基本模板，其中包含一个简单的导航栏，以及我之前实现的标题逻辑。 您需要在模板文件<em>app/templates/base.html</em>中编写代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">      &#123;% if title %&#125;</span><br><span class="line">      <span class="tag">&lt;<span class="name">title</span>&gt;</span>&#123;&#123; title &#125;&#125; - Microblog<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">      &#123;% else %&#125;</span><br><span class="line">      <span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome to Microblog<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">      &#123;% endif %&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>Microblog: <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/index"</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">        &#123;% block content %&#125;&#123;% endblock %&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个模板中，我使用<code>block</code>控制语句来定义派生模板可以插入代码的位置。 <em>block</em>被赋予一个唯一的名称，派生的模板可以在提供其内容时进行引用。</p>
+<p>通过从基础模板<em>base.html</em>继承HTML元素，我现在可以简化模板<em>index.html</em>了：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends "base.html" %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hi, &#123;&#123; user.username &#125;&#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    &#123;% for post in posts %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; post.author.username &#125;&#125; says: <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123;&#123; post.body &#125;&#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自从基础模板<em>base.html</em>接手页面的布局之后，我就可以从<em>index.html</em>中删除所有这方面的元素，只留下内容部分。 <code>extends</code>语句用来建立了两个模板之间的继承关系，这样Jinja2才知道当要求呈现<code>index.html</code>时，需要将其嵌入到<code>base.html</code>中。 而两个模板中匹配的<code>block</code>语句和其名称<code>content</code>，让Jinja2知道如何将这两个模板合并成在一起。 现在，扩展应用程序的页面就变得极其方便了，我可以创建从同一个基础模板<em>base.html</em>继承的派生模板，这就是我让应用程序的所有页面拥有统一外观布局而不用重复编写代码的秘诀。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4961528-2d5ed4ead77f74ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="模板继承"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+		
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/Python-Flask/" rel="tag"><i class="fa fa-tag"></i> Python-Flask</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/18/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(1)/" rel="next" title="Flask基础到高级(1)">
+                <i class="fa fa-chevron-left"></i> Flask基础到高级(1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/07/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(3)/" rel="prev" title="Flask基础到高级(3)">
+                Flask基础到高级(3) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" style="border-radius: 50%;" itemprop="image"
+                src="/images/EnderMan.jpg"
+                alt="Empty2081" />
+            
+              <p class="site-author-name" itemprop="name">Empty2081</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+            <span class="site-state-item-name">孤独才是人类应该有的样子</span><br><br>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?uin=2845109623" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/playlist?id=620803502&userid=352713422" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-music"></i>网易云音乐</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+<div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=516182214&auto=1&height=32"></iframe>
+</div>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是模板？"><span class="nav-number">1.</span> <span class="nav-text">什么是模板？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件语句"><span class="nav-number">2.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环"><span class="nav-number">3.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板的继承"><span class="nav-number">4.</span> <span class="nav-text">模板的继承</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Empty2081</span>
+
+  
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

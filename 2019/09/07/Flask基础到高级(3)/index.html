@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-cn,en,default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,Python-Flask," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="The-Flask-Mega-Tutorial-zh 中文翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask基础到高级(3)">
+<meta property="og:url" content="http://118.24.110.138/2019/09/07/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(3)/index.html">
+<meta property="og:site_name" content="Empty2081 Blog">
+<meta property="og:description" content="The-Flask-Mega-Tutorial-zh 中文翻译">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://118.24.110.138/2019/09/07/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(3)/1.png">
+<meta property="og:image" content="http://118.24.110.138/2019/09/07/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(3)/2.png">
+<meta property="article:published_time" content="2019-09-07T05:14:16.000Z">
+<meta property="article:modified_time" content="2019-10-21T13:38:32.000Z">
+<meta property="article:author" content="Empty2081">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Python-Flask">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://118.24.110.138/2019/09/07/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(3)/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://118.24.110.138/2019/09/07/Flask基础到高级(3)/"/>
+
+
+
+
+
+  <title>Flask基础到高级(3) | Empty2081 Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Empty2081 Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://118.24.110.138/2019/09/07/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(3)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empty2081">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/EnderMan.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Empty2081 Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flask基础到高级(3)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-07T13:14:16+08:00">
+                2019-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python3/" itemprop="url" rel="index">
+                    <span itemprop="name">Python3</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <!--<span class="post-meta-item-text">Words count in article&#58;</span>-->
+                  <span class="post-meta-item-text">本篇共 &#58;</span>
+                
+                <!--<span title="Words count in article">-->
+                <span>
+                  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <!--<span class="post-meta-item-text">Reading time &asymp;</span>-->
+                  <span class="post-meta-item-text">预计阅读 &asymp;</span>
+                
+                <!--<span title="Reading time">-->
+                <span>
+                  分钟
+                </span>
+              
+            </div>
+          
+
+          <!--
+              <div class="post-description">
+                  The-Flask-Mega-Tutorial-zh 中文翻译
+              </div<
+          -->
+          
+	          <div class="post-description">
+	        	<div style="font-size:12px;" id="hitokoto"></div>
+	        	<i style="margin: auto auto auto 30%;font-size:11px;" id="hitofrom"></i>
+	          </div>
+			  <script>
+			  fetch('https://v1.hitokoto.cn')
+				.then(function(res) {
+				  return res.json();
+				})
+				.then(function (data){
+				  var hitokoto = document.getElementById("hitokoto");
+				  hitokoto.innerText = data.hitokoto;
+				  var hitofrom = document.getElementById("hitofrom");
+				  hitofrom.innerText = "--" + data.from;
+				})
+			  </script>
+			
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+
+      
+        <hr>
+<p><a href="https://dormousehole.readthedocs.io/en/latest/" target="_blank" rel="noopener">Flask官方中文文档</a><br>此文章摘自github,<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/tree/master/docs" target="_blank" rel="noopener">luhuisicnu</a></p>
+<p>本文翻译自<a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_blank" rel="noopener">The Flask Mega-Tutorial Part I: Hello, World!</a></p>
+<p>这是Flask Mega-Tutorial系列的第三部分，我将告诉你如何使用<em>Web表单</em>。</p>
+<p>在<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/blob/master/docs/%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E6%A8%A1%E6%9D%BF.md" target="_blank" rel="noopener">第二章</a>中我为应用主页创建了一个简单的模板，并使用诸如用户和用户动态的模拟对象。在本章中，我将解决这个应用程序中仍然存在的众多遗漏之一，那就是如何通过Web表单接受用户的输入。</p>
+<p>Web表单是所有Web应用程序中最基本的组成部分之一。 我将使用表单来为用户发表动态和登录认证提供途径。</p>
+<p>在继续阅读本章之前，确保你的<em>microblog</em>应用程序状态和上一章完结时一致，并且运行时不会报任何错误。</p>
+<p><em>本章的GitHub链接为：<a href="https://github.com/miguelgrinberg/microblog/tree/v0.3" target="_blank" rel="noopener">Browse</a>, <a href="https://github.com/miguelgrinberg/microblog/archive/v0.3.zip" target="_blank" rel="noopener">Zip</a>, <a href="https://github.com/miguelgrinberg/microblog/compare/v0.2...v0.3" target="_blank" rel="noopener">Diff</a>.</em></p>
+<h2 id="Flask-WTF简介"><a href="#Flask-WTF简介" class="headerlink" title="Flask-WTF简介"></a>Flask-WTF简介</h2><p>我将使用<a href="http://packages.python.org/Flask-WTF" target="_blank" rel="noopener">Flask-WTF</a>插件来处理本应用中的Web表单，它对<a href="https://wtforms.readthedocs.io/" target="_blank" rel="noopener">WTForms</a>进行了浅层次的封装以便和Flask完美结合。这是本应用引入的第一个Flask插件，但绝不是最后一个。插件是Flask生态中的举足轻重的一部分，Flask故意设计为只包含核心功能以保持代码的整洁，并暴露接口以对接解决不同问题的插件。</p>
+<p>Flask插件都是常规的Python三方包，可以使用<code>pip</code>安装。 那就继续在你的虚拟环境中安装Flask-WTF吧：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip install flask-wtf</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>到目前为止，这个应用程序都非常简单，因此我不需要考虑它的<em>配置</em>。 但是，除了最简单的应用，你会发现Flask（也可能是Flask插件）为使用者提供了一些可自由配置的选项。你需要决定传入什么样的配置变量列表到框架中。 </p>
+<p>有几种途径来为应用指定配置选项。最基本的解决方案是使用<code>app.config</code>对象，它是一个类似字典的对象，可以将配置以键值的方式存储其中。例如，你可以这样做：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app = Flask(__name__)</span><br><span class="line">app.config[<span class="string">'SECRET_KEY'</span>] = <span class="string">'you-will-never-guess'</span></span><br><span class="line"><span class="comment"># ... add more variables here as needed</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的代码虽然可以为应用创建配置，但是我有<em>松耦合</em>的癖好。因此，我不会让配置和应用代码处于同一个部分，而是使用稍微复杂点的结构，将配置保存到一个单独的文件中。</p>
+<p>使用类来存储配置变量，才是我真正的风格。我会将这个配置类存储到单独的Python模块，以保持良好的组织结构。下面就让你见识一下这个存储在顶级目录下，名为<em>config.py</em>的模块的配置类吧：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Config</span><span class="params">(object)</span>:</span></span><br><span class="line">    SECRET_KEY = os.environ.get(<span class="string">'SECRET_KEY'</span>) <span class="keyword">or</span> <span class="string">'you-will-never-guess'</span></span><br></pre></td></tr></table></figure>
+
+<p>简单的不像话，有没有？ 配置设置被定义为<code>Config</code>类中的属性。 一旦应用程序需要更多配置选项，直接依样画葫芦，附加到这个类上即可，稍后如果我发现需要多个配置集，则可以创建它的子类。现在则不用操心。</p>
+<p><code>SECRET_KEY</code>是我添加的唯一配置选项，对大多数Flask应用来说，它都是极其重要的。Flask及其一些扩展使用密钥的值作为加密密钥，用于生成签名或令牌。Flask-WTF插件使用它来保护网页表单免受名为<a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery" target="_blank" rel="noopener">Cross-Site Request Forgery</a>或CSRF（发音为“seasurf”）的恶意攻击。顾名思义，密钥应该是隐密的，因为由它产生的令牌和签名的加密强度保证，取决于除了可信维护者之外，没有任何人能够获得它。</p>
+<p>密钥被定义成由<code>or</code>运算符连接两个项的表达式。第一个项查找环境变量<code>SECRET_KEY</code>的值，第二个项是一个硬编码的字符串。这种首先检查环境变量中是否存在这个配置，找不到的情况下就使用硬编码字符串的配置变量的模式你将会反复看到。在开发阶段，安全性要求较低，因此可以直接使用硬编码字符串。但是，当应用部署到生产服务器上的时候，我将设置一个独一无二且难以揣摩的环境变量，这样，服务器就拥有了一个别人未知的安全密钥了。</p>
+<p>拥有了这样一份配置文件，我还需要通知Flask读取并使用它。可以在生成Flask应用之后，利用<code>app.config.from_object()</code>方法来完成这个操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> Config</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.config.from_object(Config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> routes</span><br></pre></td></tr></table></figure>
+
+<p>导入<code>Config</code>类的方式，乍一看可能会让人感到困惑，不过如果你注意到从<code>flask</code>包导入<code>Flask</code>类的过程，就会发现这其实是类似的操作。 显而易见，小写的“config”是Python模块<em>config.py</em>的名字，另一个含有大写“C”的是类。</p>
+<p>正如我上面提到的，可以使用<code>app.config</code>中的字典语法来访问配置项。 在下面的Python交互式会话中，你可以看到密钥的值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> microblog <span class="keyword">import</span> app</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>app.config[<span class="string">'SECRET_KEY'</span>]</span><br><span class="line"><span class="string">'you-will-never-guess'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="用户登录表单"><a href="#用户登录表单" class="headerlink" title="用户登录表单"></a>用户登录表单</h2><p>Flask-WTF插件使用Python类来表示Web表单。表单类只需将表单的字段定义为类属性即可。</p>
+<p>为了再次践行我的<em>松耦合</em>原则，我会将表单类单独存储到名为<em>app/forms.py</em>的模块中。就让我们来定义用户登录表单来做一个开始吧，它会要求用户输入username和password，并提供一个“remember me”的复选框和提交按钮：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask_wtf <span class="keyword">import</span> FlaskForm</span><br><span class="line"><span class="keyword">from</span> wtforms <span class="keyword">import</span> StringField, PasswordField, BooleanField, SubmitField</span><br><span class="line"><span class="keyword">from</span> wtforms.validators <span class="keyword">import</span> DataRequired</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginForm</span><span class="params">(FlaskForm)</span>:</span></span><br><span class="line">    username = StringField(<span class="string">'Username'</span>, validators=[DataRequired()])</span><br><span class="line">    password = PasswordField(<span class="string">'Password'</span>, validators=[DataRequired()])</span><br><span class="line">    remember_me = BooleanField(<span class="string">'Remember Me'</span>)</span><br><span class="line">    submit = SubmitField(<span class="string">'Sign In'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>大多数Flask插件使用<code>flask_ &lt;name&gt;</code>命名约定来导入，Flask-WTF的所有内容都在<code>flask_wtf</code>包中。在本例中，<em>app/forms.py</em>模块的顶部从<code>flask_wtf</code>导入了名为<code>FlaskForm</code>的基类。</p>
+<p>由于Flask-WTF插件本身不提供字段类型，因此我直接从WTForms包中导入了四个表示表单字段的类。每个字段类都接受一个描述或别名作为第一个参数，并生成一个实例来作为<code>LoginForm</code>的类属性。</p>
+<p>你在一些字段中看到的可选参数<code>validators</code>用于验证输入字段是否符合预期。<code>DataRequired</code>验证器仅验证字段输入是否为空。更多的验证器将会在未来的表单中接触到。</p>
+<h2 id="表单模板"><a href="#表单模板" class="headerlink" title="表单模板"></a>表单模板</h2><p>下一步是将表单添加到HTML模板以便渲染到网页上。 令人高兴的是在LoginForm类中定义的字段支持自渲染为HTML元素，所以这个任务相当简单。 我将把登录模板存储在文件*app/templates/login.html *中，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">    &lt;h1&gt;Sign In&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;form action&#x3D;&quot;&quot; method&#x3D;&quot;post&quot; novalidate&gt;</span><br><span class="line">        &#123;&#123; form.hidden_tag() &#125;&#125;</span><br><span class="line">        &lt;p&gt;</span><br><span class="line">            &#123;&#123; form.username.label &#125;&#125;&lt;br&gt;</span><br><span class="line">            &#123;&#123; form.username(size&#x3D;32) &#125;&#125;</span><br><span class="line">        &lt;&#x2F;p&gt;</span><br><span class="line">        &lt;p&gt;</span><br><span class="line">            &#123;&#123; form.password.label &#125;&#125;&lt;br&gt;</span><br><span class="line">            &#123;&#123; form.password(size&#x3D;32) &#125;&#125;</span><br><span class="line">        &lt;&#x2F;p&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123; form.remember_me() &#125;&#125; &#123;&#123; form.remember_me.label &#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123; form.submit() &#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一如<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/blob/master/docs/%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E6%A8%A1%E6%9D%BF.md" target="_blank" rel="noopener">第二章</a>，在这个模板中我再次使用了<code>extends</code>来继承<code>base.html</code>基础模板。事实上，我将会对所有的模板继承基础模板，以保持顶部导航栏风格统一。</p>
+<p>这个模板需要一个form参数的传入到渲染模板的函数中，form来自于<code>LoginForm</code>类的实例化，不过我现在还没有编写它。</p>
+<p>HTML<code>&lt;form&gt;</code>元素被用作Web表单的容器。 表单的<code>action</code>属性告诉浏览器在提交用户在表单中输入的信息时应该请求的URL。 当<code>action</code>设置为空字符串时，表单将被提交给当前地址栏中的URL，即当前页面。 <code>method</code>属性指定了将表单提交给服务器时应该使用的HTTP请求方法。 默认情况下是用<code>GET</code>请求发送，但几乎在所有情况下，使用<code>POST</code>请求会提供更好的用户体验，因为这种类型的请求可以在请求的主体中提交表单数据， <code>GET</code>请求将表单字段添加到URL，会使浏览器地址栏变得混乱。</p>
+<p><code>form.hidden_tag()</code>模板参数生成了一个隐藏字段，其中包含一个用于保护表单免受CSRF攻击的<code>token</code>。 对于保护表单，你需要做的所有事情就是在模板中包括这个隐藏的字段，并在Flask配置中定义<code>SECRET_KEY</code>变量，Flask-WTF会完成剩下的工作。</p>
+<p>如果你以前编写过HTML Web表单，那么你会发现一个奇怪的现象——在此模板中没有HTML表单元素，这是因为表单的字段对象的在渲染时会自动转化为HTML元素。 我只需在需要字段标签的地方加上<code>{{ form.<field_name>.label }}</code>，需要这个字段的地方加上<code>{{ form.<field_name>() }}</code>。 对于需要附加HTML属性的字段，可以作为关键字参数传递到函数中。 此模板中的username和password字段将<code>size</code>作为参数，将其作为属性添加到<code>&lt;input&gt;</code> HTML元素中。 你也可以通过这种手段为表单字段设置class和id属性。</p>
+<h2 id="表单视图"><a href="#表单视图" class="headerlink" title="表单视图"></a>表单视图</h2><p>完成这个表单的最后一步就是编写一个新的视图函数来渲染上面创建的模板。</p>
+<p>函数的逻辑只需创建一个form实例，并将其传入渲染模板的函数中即可，然后用<em>/login</em> URL来关联它。这个视图函数也存储到<em>app/routes.py</em>模块中，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> render_template</span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> app</span><br><span class="line"><span class="keyword">from</span> app.forms <span class="keyword">import</span> LoginForm</span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    form = LoginForm()</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>, title=<span class="string">'Sign In'</span>, form=form)</span><br></pre></td></tr></table></figure>
+
+<p>我从<em>forms.py</em>导入<code>LoginForm</code>类，并生成了一个实例传入模板。<code>form=form</code>的语法看起来奇怪，这是Python函数或方法传入关键字参数的方式，左边的<code>form</code>代表在模板中引用的变量名称，右边则是传入的<em>form</em>实例。这就是获取表单字段渲染结果的所有代码了。</p>
+<p>在基础模板<em>templates/base.html</em>的导航栏上添加登录的链接，以便访问：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    Microblog:</span><br><span class="line">    &lt;a href&#x3D;&quot;&#x2F;index&quot;&gt;Home&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;a href&#x3D;&quot;&#x2F;login&quot;&gt;Login&lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此时，你可以验证结果了。运行该应用，在浏览器的地址栏中输入<code>http://localhost:5000/</code>，然后点击顶部导航栏中的“Login”链接来查看新的登录表单。 是不是非常炫酷？</p>
+<p><img src="1.png" alt="登录表单"></p>
+<h2 id="接收表单数据"><a href="#接收表单数据" class="headerlink" title="接收表单数据"></a>接收表单数据</h2><p>点击提交按钮，浏览器将显示“Method Not Allowed”错误。为什么呢？ 这是因为之前的登录视图功能到目前为止只完成了一半的工作。 它可以在网页上显示表单，但没有逻辑来处理用户提交的数据。Flask-WTF可以轻松完成这部分工作， 以下是视图函数的更新版本，它接受和验证用户提交的数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> render_template, flash, redirect</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    form = LoginForm()</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        flash(<span class="string">'Login requested for user &#123;&#125;, remember_me=&#123;&#125;'</span>.format(</span><br><span class="line">            form.username.data, form.remember_me.data))</span><br><span class="line">        <span class="keyword">return</span> redirect(<span class="string">'/index'</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>, title=<span class="string">'Sign In'</span>, form=form)</span><br></pre></td></tr></table></figure>
+
+<p>这个版本中的第一个新东西是路由装饰器中的<code>methods</code>参数。 它告诉Flask这个视图函数接受<code>GET</code>和<code>POST</code>请求，并覆盖了默认的<code>GET</code>。 HTTP协议规定对<code>GET</code>请求需要返回信息给客户端（本例中是浏览器）。 本应用的所有<code>GET</code>请求都是如此。 当浏览器向服务器提交表单数据时，通常会使用<code>POST</code>请求（实际上用<code>GET</code>请求也可以，但这不是推荐的做法）。之前的“Method Not Allowed”错误正是由于视图函数还未配置允许<code>POST</code>请求。 通过传入<code>methods</code>参数，你就能告诉Flask哪些请求方法可以被接受。</p>
+<p><code>form.validate_on_submit()</code>实例方法会执行form校验的工作。当浏览器发起<code>GET</code>请求的时候，它返回<code>False</code>，这样视图函数就会跳过<code>if</code>块中的代码，直接转到视图函数的最后一句来渲染模板。</p>
+<p>当用户在浏览器点击提交按钮后，浏览器会发送<code>POST</code>请求。<code>form.validate_on_submit()</code>就会获取到所有的数据，运行字段各自的验证器，全部通过之后就会返回<code>True</code>，这表示数据有效。不过，一旦有任意一个字段未通过验证，这个实例方法就会返回<code>False</code>，引发类似<code>GET</code>请求那样的表单的渲染并返回给用户。稍后我会在添加代码以实现在验证失败的时候显示一条错误消息。</p>
+<p>当<code>form.validate_on_submit()</code>返回<code>True</code>时，登录视图函数调用从Flask导入的两个新函数。 <code>flash()</code>函数是向用户显示消息的有效途径。 许多应用使用这个技术来让用户知道某个动作是否成功。我将使用这种机制作为临时解决方案，因为我没有基础架构来真正地登录用户。 显示一条消息来确认应用已经收到登录认证凭据，我认为对当前来说已经足够了。</p>
+<p>登录视图函数中使用的第二个新函数是<code>redirect()</code>。这个函数指引浏览器自动重定向到它的参数所关联的URL。当前视图函数使用它将用户重定向到应用的主页。</p>
+<p>当你调用<code>flash()</code>函数后，Flask会存储这个消息，但是却不会奇迹般地直接出现在页面上。模板需要将消息渲染到基础模板中，才能让所有派生出来的模板都能显示出来。更新后的基础模板代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &#123;% if title %&#125;</span><br><span class="line">        &lt;title&gt;&#123;&#123; title &#125;&#125; - microblog&lt;&#x2F;title&gt;</span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">        &lt;title&gt;microblog&lt;&#x2F;title&gt;</span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">    &lt;&#x2F;head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            Microblog:</span><br><span class="line">            &lt;a href&#x3D;&quot;&#x2F;index&quot;&gt;Home&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;a href&#x3D;&quot;&#x2F;login&quot;&gt;Login&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;hr&gt;</span><br><span class="line">        &#123;% with messages &#x3D; get_flashed_messages() %&#125;</span><br><span class="line">        &#123;% if messages %&#125;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &#123;% for message in messages %&#125;</span><br><span class="line">            &lt;li&gt;&#123;&#123; message &#125;&#125;&lt;&#x2F;li&gt;</span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">        &lt;&#x2F;ul&gt;</span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">        &#123;% endwith %&#125;</span><br><span class="line">        &#123;% block content %&#125;&#123;% endblock %&#125;</span><br><span class="line">    &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此处我用了<code>with</code>结构在当前模板的上下文中来将<code>get_flashed_messages()</code>的结果赋值给变量<code>messages</code>。<code>get_flashed_messages()</code>是Flask中的一个函数，它返回用<code>flash()</code>注册过的消息列表。接下来的条件结构用来检查变量<code>messages</code>是否包含元素，如果有，则在<code>&lt;ul&gt;</code>元素中，为每条消息用<code>&lt;li&gt;</code>元素来包裹渲染。这种渲染的样式结果看起来不会美观，之后会有主题讲到Web应用的样式。</p>
+<p>闪现消息的一个有趣的属性是，一旦通过<code>get_flashed_messages</code>函数请求了一次，它们就会从消息列表中移除，所以在调用<code>flash()</code>函数后它们只会出现一次。</p>
+<p>时机成熟，再次测试表单吧，将username和password字段留空并点击提交按钮来观察<code>DataRequired</code>验证器是如何中断提交处理流程的。</p>
+<h2 id="完善字段验证"><a href="#完善字段验证" class="headerlink" title="完善字段验证"></a>完善字段验证</h2><p>表单字段的验证器可防止无效数据被接收到应用中。 应用处理无效表单输入的方式是重新显示表单，以便用户进行更正。</p>
+<p>如果你尝试过提交无效的数据，相信你会注意到，虽然验证机制查无遗漏，却没有给出表单错误的具体线索。下一个任务是通过在验证失败的每个字段旁边添加有意义的错误消息来改善用户体验。</p>
+<p>实际上，表单验证器已经生成了这些描述性错误消息，所缺少的不过是模板中的一些额外的逻辑来渲染它们。</p>
+<p>这是给username和password字段添加了验证描述性错误消息渲染逻辑之后的登录模板：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">    &lt;h1&gt;Sign In&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;form action&#x3D;&quot;&quot; method&#x3D;&quot;post&quot; novalidate&gt;</span><br><span class="line">        &#123;&#123; form.hidden_tag() &#125;&#125;</span><br><span class="line">        &lt;p&gt;</span><br><span class="line">            &#123;&#123; form.username.label &#125;&#125;&lt;br&gt;</span><br><span class="line">            &#123;&#123; form.username(size&#x3D;32) &#125;&#125;&lt;br&gt;</span><br><span class="line">            &#123;% for error in form.username.errors %&#125;</span><br><span class="line">            &lt;span style&#x3D;&quot;color: red;&quot;&gt;[&#123;&#123; error &#125;&#125;]&lt;&#x2F;span&gt;</span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">        &lt;&#x2F;p&gt;</span><br><span class="line">        &lt;p&gt;</span><br><span class="line">            &#123;&#123; form.password.label &#125;&#125;&lt;br&gt;</span><br><span class="line">            &#123;&#123; form.password(size&#x3D;32) &#125;&#125;&lt;br&gt;</span><br><span class="line">            &#123;% for error in form.password.errors %&#125;</span><br><span class="line">            &lt;span style&#x3D;&quot;color: red;&quot;&gt;[&#123;&#123; error &#125;&#125;]&lt;&#x2F;span&gt;</span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">        &lt;&#x2F;p&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123; form.remember_me() &#125;&#125; &#123;&#123; form.remember_me.label &#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123; form.submit() &#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我做的唯一的改变是，在username和password字段之后添加for循环以便用红色字体来渲染验证器添加的错误信息。通常情况下，拥有验证器的字段都会用<code>form.&lt;field_name&gt;.errors</code>来渲染错误信息。 一个字段的验证错误信息结果是一个列表，因为字段可以附加多个验证器，并且多个验证器都可能会提供错误消息以显示给用户。</p>
+<p>如果你尝试在未填写username和password字段的情况下提交表单，就可以看到显眼的红色错误信息了。</p>
+<p><img src="2.png" alt="表单验证"></p>
+<h2 id="生成链接"><a href="#生成链接" class="headerlink" title="生成链接"></a>生成链接</h2><p>现在的登录表单已经相当完整了，但在结束本章之前，我想讨论在模板和重定向中包含链接的妥当方法。 到目前为止，你已经看到了一些定义链接的例子。 例如，这是当前基础模板中的导航栏代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    Microblog:</span><br><span class="line">    &lt;a href&#x3D;&quot;&#x2F;index&quot;&gt;Home&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;a href&#x3D;&quot;&#x2F;login&quot;&gt;Login&lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>登录视图函数同样定义了一个传入到<code>redirect()</code>函数作为参数的链接：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/login', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    form = LoginForm()</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line">        <span class="keyword">return</span> redirect(<span class="string">'/index'</span>)</span><br><span class="line">    <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+<p>直接在模板和源文件中硬编码链接存在隐患，如果有一天你决定重新组织链接，那么你将不得不在整个应用中搜索并替换这些链接。</p>
+<p>为了更好地管理这些链接，Flask提供了一个名为<code>url_for()</code>的函数，它使用URL到视图函数的内部映射关系来生成URL。 例如，<code>url_for(&#39;login&#39;)</code>返回<code>/login</code>，<code>url_for(&#39;index&#39;)</code>返回<code>/index</code>。 <code>url_for()</code>的参数是<em>endpoint</em>名称，也就是视图函数的名字。</p>
+<p>你可能会问，为什么使用函数名称而不是URL？ 事实是，URL比起视图函数名称变更的可能性更高。 稍后你会了解到的第二个原因是，一些URL中包含动态组件，手动生成这些URL需要连接多个元素，枯燥乏味且容易出错。 <code>url_for()</code>生成这种复杂的URL就方便许多。</p>
+<p>因此，从现在起，一旦我需要生成应用链接，我就会使用<code>url_for()</code>。基础模板中的导航栏部分代码变更如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    Microblog:</span><br><span class="line">    &lt;a href&#x3D;&quot;&#123;&#123; url_for(&#39;index&#39;) &#125;&#125;&quot;&gt;Home&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;a href&#x3D;&quot;&#123;&#123; url_for(&#39;login&#39;) &#125;&#125;&quot;&gt;Login&lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>login()</code>视图函数也做了相应变更：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> render_template, flash, redirect, url_for</span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    form = LoginForm()</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>))</span><br><span class="line">    <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+		
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/Python-Flask/" rel="tag"><i class="fa fa-tag"></i> Python-Flask</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/19/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(2)/" rel="next" title="Flask基础到高级(2)">
+                <i class="fa fa-chevron-left"></i> Flask基础到高级(2)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/19/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(4)/" rel="prev" title="Flask基础到高级(4)">
+                Flask基础到高级(4) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" style="border-radius: 50%;" itemprop="image"
+                src="/images/EnderMan.jpg"
+                alt="Empty2081" />
+            
+              <p class="site-author-name" itemprop="name">Empty2081</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+            <span class="site-state-item-name">孤独才是人类应该有的样子</span><br><br>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?uin=2845109623" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/playlist?id=620803502&userid=352713422" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-music"></i>网易云音乐</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+<div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=516182214&auto=1&height=32"></iframe>
+</div>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask-WTF简介"><span class="nav-number">1.</span> <span class="nav-text">Flask-WTF简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户登录表单"><span class="nav-number">3.</span> <span class="nav-text">用户登录表单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表单模板"><span class="nav-number">4.</span> <span class="nav-text">表单模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表单视图"><span class="nav-number">5.</span> <span class="nav-text">表单视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接收表单数据"><span class="nav-number">6.</span> <span class="nav-text">接收表单数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完善字段验证"><span class="nav-number">7.</span> <span class="nav-text">完善字段验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成链接"><span class="nav-number">8.</span> <span class="nav-text">生成链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Empty2081</span>
+
+  
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-cn,en,default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,Python-Flask," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="The-Flask-Mega-Tutorial-zh 中文翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask基础到高级(4)">
+<meta property="og:url" content="http://118.24.110.138/2019/10/19/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(4)/index.html">
+<meta property="og:site_name" content="Empty2081 Blog">
+<meta property="og:description" content="The-Flask-Mega-Tutorial-zh 中文翻译">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4961528-3d7f26d60dd340ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4961528-7057ec250f40bed5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2019-10-19T05:14:16.000Z">
+<meta property="article:modified_time" content="2020-01-20T02:14:09.000Z">
+<meta property="article:author" content="Empty2081">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Python-Flask">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4961528-3d7f26d60dd340ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://118.24.110.138/2019/10/19/Flask基础到高级(4)/"/>
+
+
+
+
+
+  <title>Flask基础到高级(4) | Empty2081 Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Empty2081 Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://118.24.110.138/2019/10/19/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(4)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empty2081">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/EnderMan.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Empty2081 Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flask基础到高级(4)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-19T13:14:16+08:00">
+                2019-10-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python3/" itemprop="url" rel="index">
+                    <span itemprop="name">Python3</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <!--<span class="post-meta-item-text">Words count in article&#58;</span>-->
+                  <span class="post-meta-item-text">本篇共 &#58;</span>
+                
+                <!--<span title="Words count in article">-->
+                <span>
+                  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <!--<span class="post-meta-item-text">Reading time &asymp;</span>-->
+                  <span class="post-meta-item-text">预计阅读 &asymp;</span>
+                
+                <!--<span title="Reading time">-->
+                <span>
+                  分钟
+                </span>
+              
+            </div>
+          
+
+          <!--
+              <div class="post-description">
+                  The-Flask-Mega-Tutorial-zh 中文翻译
+              </div<
+          -->
+          
+	          <div class="post-description">
+	        	<div style="font-size:12px;" id="hitokoto"></div>
+	        	<i style="margin: auto auto auto 30%;font-size:11px;" id="hitofrom"></i>
+	          </div>
+			  <script>
+			  fetch('https://v1.hitokoto.cn')
+				.then(function(res) {
+				  return res.json();
+				})
+				.then(function (data){
+				  var hitokoto = document.getElementById("hitokoto");
+				  hitokoto.innerText = data.hitokoto;
+				  var hitofrom = document.getElementById("hitofrom");
+				  hitofrom.innerText = "--" + data.from;
+				})
+			  </script>
+			
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+
+      
+        <hr>
+<p><a href="https://dormousehole.readthedocs.io/en/latest/" target="_blank" rel="noopener">Flask官方中文文档</a><br>此文章摘自github,<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/tree/master/docs" target="_blank" rel="noopener">luhuisicnu</a></p>
+<p>本文翻译自<a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_blank" rel="noopener">The Flask Mega-Tutorial Part I: Hello, World!</a></p>
+<p>在Flask Mega-Tutorial系列的第四部分，我将告诉你如何使用<em>数据库</em>。</p>
+<p>本章的主题是重中之重！大多数应用都需要持久化存储数据，并高效地执行的增删查改的操作，<em>数据库</em>为此而生。</p>
+<p><em>本章的GitHub链接为： <a href="https://github.com/miguelgrinberg/microblog/tree/v0.4" target="_blank" rel="noopener">Browse</a>, <a href="https://github.com/miguelgrinberg/microblog/archive/v0.4.zip" target="_blank" rel="noopener">Zip</a>, <a href="https://github.com/miguelgrinberg/microblog/compare/v0.3...v0.4" target="_blank" rel="noopener">Diff</a>.</em></p>
+<h2 id="Flask中的数据库"><a href="#Flask中的数据库" class="headerlink" title="Flask中的数据库"></a>Flask中的数据库</h2><p>Flask本身不支持数据库，相信你已经听说过了。 正如表单那样，这也是Flask有意为之。对使用的数据库插件自由选择，岂不是比被迫适应其中之一，更让人拥有主动权吗？</p>
+<p>绝大多数的数据库都提供了Python客户端包，它们之中的大部分都被封装成Flask插件以便更好地和Flask应用结合。数据库被划分为两大类，遵循<em>关系</em>模型的一类是关系数据库，另外的则是非关系数据库，简称<em>NoSQL</em>，表现在它们不支持流行的关系查询语言<a href="https://en.wikipedia.org/wiki/SQL" target="_blank" rel="noopener">SQL</a>（译者注：部分人也宣称NoSQL代表不仅仅只是SQL）。虽然两类数据库都是伟大的产品，但我认为关系数据库更适合具有结构化数据的应用程序，例如用户列表，用户动态等，而NoSQL数据库往往更适合非结构化数据。 本应用可以像大多数其他应用一样，使用任何一种类型的数据库来实现，但是出于上述原因，我将使用关系数据库。</p>
+<p>在<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/blob/master/docs/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9AWeb%E8%A1%A8%E5%8D%95.md" target="_blank" rel="noopener">第三章</a>中，我向你展示了第一个Flask扩展，在本章中，我还要用到两个。 第一个是<a href="http://packages.python.org/Flask-SQLAlchemy" target="_blank" rel="noopener">Flask-SQLAlchemy</a>，这个插件为流行的<a href="http://www.sqlalchemy.org/" target="_blank" rel="noopener">SQLAlchemy</a>包做了一层封装以便在Flask中调用更方便，类似<em>SQLAlchemy</em>这样的包叫做<a href="http://en.wikipedia.org/wiki/Object-relational_mapping" target="_blank" rel="noopener">Object Relational Mapper</a>，简称ORM。 ORM允许应用程序使用高级实体（如类，对象和方法）而不是表和SQL来管理数据库。 ORM的工作就是将高级操作转换成数据库命令。</p>
+<p>SQLAlchemy不只是某一款数据库软件的ORM，而是支持包含<a href="https://www.mysql.com/" target="_blank" rel="noopener">MySQL</a>、<a href="https://www.postgresql.org/" target="_blank" rel="noopener">PostgreSQL</a>和<a href="https://www.sqlite.org/" target="_blank" rel="noopener">SQLite</a>在内的很多数据库软件。简直是太强大了，你可以在开发的时候使用简单易用且无需另起服务的SQLite，需要部署应用到生产服务器上时，则选用更健壮的MySQL或PostgreSQL服务，并且不需要修改应用代码（译者注：只需修改应用配置）。</p>
+<p>确认激活虚拟环境之后，利用如下命令来安装Flask-SQLAlchemy插件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip install flask-sqlalchemy</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库迁移"><a href="#数据库迁移" class="headerlink" title="数据库迁移"></a>数据库迁移</h2><p>我所见过的绝大多数数据库教程都是关于如何创建和使用数据库的，却没有指出当需要对现有数据库更新或者添加表结构时，应当如何应对。 这是一项困难的工作，因为关系数据库是以结构化数据为中心的，所以当结构发生变化时，数据库中的已有数据需要被迁移到修改后的结构中。</p>
+<p>我将在本章中介绍的第二个插件是<a href="https://github.com/miguelgrinberg/flask-migrate" target="_blank" rel="noopener">Flask-Migrate</a>。 这个插件是<a href="https://bitbucket.org/zzzeek/alembic" target="_blank" rel="noopener">Alembic</a>的一个Flask封装，是SQLAlchemy的一个数据库迁移框架。 使用数据库迁移增加了启动数据库时候的一些工作，但这对将来的数据库结构稳健变更来说，是一个很小的代价。</p>
+<p>安装Flask-Migrate和安装你见过的其他插件的方式一样：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip install flask-migrate</span><br></pre></td></tr></table></figure>
+
+<h2 id="Flask-SQLAlchemy配置"><a href="#Flask-SQLAlchemy配置" class="headerlink" title="Flask-SQLAlchemy配置"></a>Flask-SQLAlchemy配置</h2><p>开发阶段，我会使用SQLite数据库，SQLite数据库是开发小型乃至中型应用最方便的选择，因为每个数据库都存储在磁盘上的单个文件中，并且不需要像MySQL和PostgreSQL那样运行数据库服务。</p>
+<p>让我们给配置文件添加两个新的配置项：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">basedir = os.path.abspath(os.path.dirname(__file__))</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Config</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">    SQLALCHEMY_DATABASE_URI = os.environ.get(<span class="string">'DATABASE_URL'</span>) <span class="keyword">or</span> \</span><br><span class="line">        <span class="string">'sqlite:///'</span> + os.path.join(basedir, <span class="string">'app.db'</span>)</span><br><span class="line">    SQLALCHEMY_TRACK_MODIFICATIONS = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>Flask-SQLAlchemy插件从<code>SQLALCHEMY_DATABASE_URI</code>配置变量中获取应用的数据库的位置。 当回顾<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/blob/master/docs/%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9AWeb%E8%A1%A8%E5%8D%95.md" target="_blank" rel="noopener">第三章</a>可以发现，首先从环境变量获取配置变量，未获取到就使用默认值，这样做是一个好习惯。 本处，我从<code>DATABASE_URL</code>环境变量中获取数据库URL，如果没有定义，我将其配置为<code>basedir</code>变量表示的应用顶级目录下的一个名为<em>app.db</em>的文件路径。</p>
+<p><code>SQLALCHEMY_TRACK_MODIFICATIONS</code>配置项用于设置数据发生变更之后是否发送信号给应用，我不需要这项功能，因此将其设置为<code>False</code>。</p>
+<p>数据库在应用的表现形式是一个<em>数据库实例</em>，数据库迁移引擎同样如此。它们将会在应用实例化之后进行实例化和注册操作。<code>app/__init__.py</code>文件变更如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> Config</span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line"><span class="keyword">from</span> flask_migrate <span class="keyword">import</span> Migrate</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.config.from_object(Config)</span><br><span class="line">db = SQLAlchemy(app)</span><br><span class="line">migrate = Migrate(app, db)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> routes, models</span><br></pre></td></tr></table></figure>
+
+<p>在这个初始化脚本中我更改了三处。首先，我添加了一个<code>db</code>对象来表示数据库。然后，我又添加了数据库迁移引擎<code>migrate</code>。这种注册Flask插件的模式希望你了然于胸，因为大多数Flask插件都是这样初始化的。最后，我在底部导入了一个名为<code>models</code>的模块，这个模块将会用来定义数据库结构。</p>
+<h2 id="数据库模型"><a href="#数据库模型" class="headerlink" title="数据库模型"></a>数据库模型</h2><p>定义数据库中一张表及其字段的类，通常叫做数据模型。ORM(SQLAlchemy)会将类的实例关联到数据库表中的数据行，并翻译相关操作。</p>
+<p>就让我们从用户模型开始吧，利用 <a href="http://ondras.zarovi.cz/sql/demo" target="_blank" rel="noopener">WWW SQL Designer</a>工具，我画了一张图来设计用户表的各个字段（译者注：实际表名为user）：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4961528-3d7f26d60dd340ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用户表"></p>
+<p><code>id</code>字段通常存在于所有模型并用作<em>主键</em>。每个用户都会被数据库分配一个id值，并存储到这个字段中。大多数情况下，主键都是数据库自动赋值的，我只需要提供<code>id</code>字段作为主键即可。</p>
+<p><code>username</code>，<code>email</code>和<code>password_hash</code>字段被定义为字符串（数据库术语中的<code>VARCHAR</code>），并指定其最大长度，以便数据库可以优化空间使用率。 <code>username</code>和<code>email</code>字段的用途不言而喻，<code>password_hash</code>字段值得提一下。 我想确保我正在构建的应用采用安全最佳实践，因此我不会将用户密码明文存储在数据库中。 明文存储密码的问题是，如果数据库被攻破，攻击者就会获得密码，这对用户隐私来说可能是毁灭性的。 如果使用<em>哈希密码</em>，这就大大提高了安全性。 这将是另一章的主题，所以现在不需分心。</p>
+<p>用户表构思完毕之后，我将其用代码实现，并存储到新建的模块<em>app/models.py</em>中，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> db</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    id = db.Column(db.Integer, primary_key=<span class="literal">True</span>)</span><br><span class="line">    username = db.Column(db.String(<span class="number">64</span>), index=<span class="literal">True</span>, unique=<span class="literal">True</span>)</span><br><span class="line">    email = db.Column(db.String(<span class="number">120</span>), index=<span class="literal">True</span>, unique=<span class="literal">True</span>)</span><br><span class="line">    password_hash = db.Column(db.String(<span class="number">128</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&lt;User &#123;&#125;&gt;'</span>.format(self.username)</span><br></pre></td></tr></table></figure>
+
+<p>上面创建的User类继承自db.Model，它是Flask-SQLAlchemy中所有模型的基类。 这个类将表的字段定义为类属性，字段被创建为<code>db.Column</code>类的实例，它传入字段类型以及其他可选参数，例如，可选参数中允许指示哪些字段是唯一的并且是可索引的，这对高效的数据检索十分重要。</p>
+<p>该类的<code>__repr__</code>方法用于在调试时打印用户实例。在下面的Python交互式会话中你可以看到<code>__repr__()</code>方法的运行情况：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; from app.models import User</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u = User(username=<span class="string">'susan'</span>, email=<span class="string">'susan@example.com'</span>)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u</span></span><br><span class="line">&lt;User susan&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建数据库迁移存储库"><a href="#创建数据库迁移存储库" class="headerlink" title="创建数据库迁移存储库"></a>创建数据库迁移存储库</h2><p>上一节中创建的模型类定义了此应用程序的初始数据库结构（<em>元数据</em>）。 但随着应用的不断增长，很可能会新增、修改或删除数据库结构。 Alembic（Flask-Migrate使用的迁移框架）将以一种不需要重新创建数据库的方式进行数据库结构的变更。</p>
+<p>这是一个看起来相当艰巨的任务，为了实现它，Alembic维护一个<em>数据库迁移存储库</em>，它是一个存储迁移脚本的目录。 每当对数据库结构进行更改后，都需要向存储库中添加一个包含更改的详细信息的迁移脚本。 当应用这些迁移脚本到数据库时，它们将按照创建的顺序执行。</p>
+<p>Flask-Migrate通过<code>flask</code>命令暴露来它的子命令。 你已经看过<code>flask run</code>，这是一个Flask本身的子命令。 Flask-Migrate添加了<code>flask db</code>子命令来管理与数据库迁移相关的所有事情。 那么让我们通过运行<code>flask db init</code>来创建microblog的迁移存储库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ flask db init</span><br><span class="line">  Creating directory /home/miguel/microblog/migrations ... done</span><br><span class="line">  Creating directory /home/miguel/microblog/migrations/versions ... done</span><br><span class="line">  Generating /home/miguel/microblog/migrations/alembic.ini ... done</span><br><span class="line">  Generating /home/miguel/microblog/migrations/env.py ... done</span><br><span class="line">  Generating /home/miguel/microblog/migrations/README ... done</span><br><span class="line">  Generating /home/miguel/microblog/migrations/script.py.mako ... done</span><br><span class="line">  Please edit configuration/connection/logging settings in</span><br><span class="line">  '/home/miguel/microblog/migrations/alembic.ini' before proceeding.</span><br></pre></td></tr></table></figure>
+
+<p>请记住，<code>flask</code>命令依赖于<code>FLASK_APP</code>环境变量来知道Flask应用入口在哪里。 对于本应用，正如<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/blob/master/docs/%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9AHello%2C%20World!.md" target="_blank" rel="noopener">第一章</a>，你需要设置<code>FLASK_APP = microblog.py</code>。</p>
+<p>运行迁移初始化命令之后，你会发现一个名为<em>migrations</em>的新目录。该目录中包含一个名为<em>versions</em>的子目录以及若干文件。从现在起，这些文件就是你项目的一部分了，应该添加到代码版本管理中去。</p>
+<h2 id="第一次数据库迁移"><a href="#第一次数据库迁移" class="headerlink" title="第一次数据库迁移"></a>第一次数据库迁移</h2><p>包含映射到<code>User</code>数据库模型的用户表的迁移存储库生成后，是时候创建第一次数据库迁移了。 有两种方法来创建数据库迁移：手动或自动。 要自动生成迁移，Alembic会将数据库模型定义的数据库模式与数据库中当前使用的实际数据库模式进行比较。 然后，使用必要的更改来填充迁移脚本，以使数据库模式与应用程序模型匹配。 当前情况是，由于之前没有数据库，自动迁移将把整个User模型添加到迁移脚本中。 <code>flask db migrate</code>子命令生成这些自动迁移：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ flask db migrate -m "users table"</span><br><span class="line">INFO  [alembic.runtime.migration] Context impl SQLiteImpl.</span><br><span class="line">INFO  [alembic.runtime.migration] Will assume non-transactional DDL.</span><br><span class="line">INFO  [alembic.autogenerate.compare] Detected added table 'user'</span><br><span class="line">INFO  [alembic.autogenerate.compare] Detected added index 'ix_user_email' on '['email']'</span><br><span class="line">INFO  [alembic.autogenerate.compare] Detected added index 'ix_user_username' on '['username']'</span><br><span class="line">  Generating /home/miguel/microblog/migrations/versions/e517276bb1c2_users_table.py ... done</span><br></pre></td></tr></table></figure>
+
+<p>通过命令输出，你可以了解到Alembic在创建迁移的过程中执行了哪些逻辑。前两行是常规信息，通常可以忽略。 之后的输出表明检测到了一个用户表和两个索引。 然后它会告诉你迁移脚本的输出路径。 <code>e517276bb1c2</code>是自动生成的一个用于迁移的唯一标识（你运行的结果会有所不同）。 <code>-m</code>可选参数为迁移添加了一个简短的注释。</p>
+<p>生成的迁移脚本现在是你项目的一部分了，需要将其合并到源代码管理中。 如果你好奇，并检查了它的代码，就会发现它有两个函数叫<code>upgrade()</code>和<code>downgrade()</code>。 <code>upgrade()</code>函数应用迁移，<code>downgrade()</code>函数回滚迁移。 Alembic通过使用降级方法可以将数据库迁移到历史中的任何点，甚至迁移到较旧的版本。</p>
+<p><code>flask db migrate</code>命令不会对数据库进行任何更改，只会生成迁移脚本。 要将更改应用到数据库，必须使用<code>flask db upgrade</code>命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ flask db upgrade</span><br><span class="line">INFO  [alembic.runtime.migration] Context impl SQLiteImpl.</span><br><span class="line">INFO  [alembic.runtime.migration] Will assume non-transactional DDL.</span><br><span class="line">INFO  [alembic.runtime.migration] Running upgrade  -&gt; e517276bb1c2, users table</span><br></pre></td></tr></table></figure>
+
+<p>因为本应用使用SQLite，所以<code>upgrade</code>命令检测到数据库不存在时，会创建它（在这个命令完成之后，你会注意到一个名为<em>app.db</em>的文件，即SQLite数据库）。 在使用类似MySQL和PostgreSQL的数据库服务时，必须在运行<code>upgrade</code>之前在数据库服务器上创建数据库。</p>
+<h2 id="数据库升级和降级流程"><a href="#数据库升级和降级流程" class="headerlink" title="数据库升级和降级流程"></a>数据库升级和降级流程</h2><p>目前，本应用还处于初期阶段，但讨论一下未来的数据库迁移战略也无伤大雅。 假设你的开发计算机上存有应用的源代码，并且还将其部署到生产服务器上，运行应用并上线提供服务。</p>
+<p>而应用在下一个版本必须对模型进行更改，例如需要添加一个新表。 如果没有迁移机制，这将需要做许多工作。无论是在你的开发机器上，还是在你的服务器上，都需要弄清楚如何变更你的数据库结构才能完成这项任务。</p>
+<p>通过数据库迁移机制的支持，在你修改应用中的模型之后，将生成一个新的迁移脚本（<code>flask db migrate</code>），你可能会审查它以确保自动生成的正确性，然后将更改应用到你的开发数据库（<code>flask db upgrade</code>）。 测试无误后，将迁移脚本添加到源代码管理并提交。</p>
+<p>当准备将新版本的应用发布到生产服务器时，你只需要获取包含新增迁移脚本的更新版本的应用，然后运行<code>flask db upgrade</code>即可。 Alembic将检测到生产数据库未更新到最新版本，并运行在上一版本之后创建的所有新增迁移脚本。</p>
+<p>正如我前面提到的，<code>flask db downgrade</code>命令可以回滚上次的迁移。 虽然在生产系统上不太可能需要此选项，但在开发过程中可能会发现它非常有用。 你可能已经生成了一个迁移脚本并将其应用，只是发现所做的更改并不完全是你所需要的。 在这种情况下，可以降级数据库，删除迁移脚本，然后生成一个新的来替换它。</p>
+<h2 id="数据库关系"><a href="#数据库关系" class="headerlink" title="数据库关系"></a>数据库关系</h2><p>关系数据库擅长存储数据项之间的关系。 考虑用户发表动态的情况， 用户将在<code>user</code>表中有一个记录，并且这条用户动态将在<code>post</code>表中有一个记录。 标记谁写了一个给定的动态的最有效的方法是链接两个相关的记录。</p>
+<p>一旦建立了用户和动态之间的关系，数据库就可以在查询中展示它。最小的例子就是当你看一条用户动态的时候需要知道是谁写的。一个更复杂的查询是， 如果你好奇一个用户时，你可能想知道这个用户写的所有动态。 Flask-SQLAlchemy有助于实现这两种查询。</p>
+<p>让我们扩展数据库来存储用户动态，以查看实际中的关系。 这是一个新表<code>post</code>的设计（译者注：实际表名分别为user和post）：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4961528-7057ec250f40bed5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据库关系"></p>
+<p><code>post</code>表将具有必须的<code>id</code>、用户动态的<code>body</code>和<code>timestamp</code>字段。 除了这些预期的字段之外，我还添加了一个<code>user_id</code>字段，将该用户动态链接到其作者。 你已经看到所有用户都有一个唯一的<code>id</code>主键， 将用户动态链接到其作者的方法是添加对用户<code>id</code>的引用，这正是<code>user_id</code>字段所在的位置。 这个<code>user_id</code>字段被称为<em>外键</em>。 上面的数据库图显示了外键作为该字段和它引用的表的<code>id</code>字段之间的链接。 这种关系被称为<em>一对多</em>，因为“一个”用户写了“多”条动态。</p>
+<p>修改后的<em>app/models.py</em>如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> db</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    id = db.Column(db.Integer, primary_key=<span class="literal">True</span>)</span><br><span class="line">    username = db.Column(db.String(<span class="number">64</span>), index=<span class="literal">True</span>, unique=<span class="literal">True</span>)</span><br><span class="line">    email = db.Column(db.String(<span class="number">120</span>), index=<span class="literal">True</span>, unique=<span class="literal">True</span>)</span><br><span class="line">    password_hash = db.Column(db.String(<span class="number">128</span>))</span><br><span class="line">    posts = db.relationship(<span class="string">'Post'</span>, backref=<span class="string">'author'</span>, lazy=<span class="string">'dynamic'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&lt;User &#123;&#125;&gt;'</span>.format(self.username)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Post</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    id = db.Column(db.Integer, primary_key=<span class="literal">True</span>)</span><br><span class="line">    body = db.Column(db.String(<span class="number">140</span>))</span><br><span class="line">    timestamp = db.Column(db.DateTime, index=<span class="literal">True</span>, default=datetime.utcnow)</span><br><span class="line">    user_id = db.Column(db.Integer, db.ForeignKey(<span class="string">'user.id'</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&lt;Post &#123;&#125;&gt;'</span>.format(self.body)</span><br></pre></td></tr></table></figure>
+
+<p>新的“Post”类表示用户发表的动态。 <code>timestamp</code>字段将被编入索引，如果你想按时间顺序检索用户动态，这将非常有用。 我还为其添加了一个<code>default</code>参数，并传入了<code>datetime.utcnow</code>函数。 当你将一个函数作为默认值传入后，SQLAlchemy会将该字段设置为调用该函数的值（请注意，在<code>utcnow</code>之后我没有包含<code>()</code>，所以我传递函数本身，而不是调用它的结果）。 通常，在服务应用中使用UTC日期和时间是推荐做法。 这可以确保你使用统一的时间戳，无论用户位于何处，这些时间戳会在显示时转换为用户的当地时间。</p>
+<p><code>user_id</code>字段被初始化为<code>user.id</code>的外键，这意味着它引用了来自用户表的<code>id</code>值。本处的<code>user</code>是数据库表的名称，Flask-SQLAlchemy自动设置类名为小写来作为对应表的名称。 <code>User</code>类有一个新的<code>posts</code>字段，用<code>db.relationship</code>初始化。这不是实际的数据库字段，而是用户和其动态之间关系的高级视图，因此它不在数据库图表中。对于一对多关系，<code>db.relationship</code>字段通常在“一”的这边定义，并用作访问“多”的便捷方式。因此，如果我有一个用户实例<code>u</code>，表达式<code>u.posts</code>将运行一个数据库查询，返回该用户发表过的所有动态。 <code>db.relationship</code>的第一个参数表示代表关系“多”的类。 <code>backref</code>参数定义了代表“多”的类的实例反向调用“一”的时候的属性名称。这将会为用户动态添加一个属性<code>post.author</code>，调用它将返回给该用户动态的用户实例。 <code>lazy</code>参数定义了这种关系调用的数据库查询是如何执行的，这个我会在后面讨论。不要觉得这些细节没什么意思，本章的结尾将会给出对应的例子。</p>
+<p>一旦我变更了应用模型，就需要生成一个新的数据库迁移：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ flask db migrate -m "posts table"</span><br><span class="line">INFO  [alembic.runtime.migration] Context impl SQLiteImpl.</span><br><span class="line">INFO  [alembic.runtime.migration] Will assume non-transactional DDL.</span><br><span class="line">INFO  [alembic.autogenerate.compare] Detected added table 'post'</span><br><span class="line">INFO  [alembic.autogenerate.compare] Detected added index 'ix_post_timestamp' on '['timestamp']'</span><br><span class="line">  Generating /home/miguel/microblog/migrations/versions/780739b227a7_posts_table.py ... done</span><br></pre></td></tr></table></figure>
+
+<p>并将这个迁移应用到数据库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ flask db upgrade</span><br><span class="line">INFO  [alembic.runtime.migration] Context impl SQLiteImpl.</span><br><span class="line">INFO  [alembic.runtime.migration] Will assume non-transactional DDL.</span><br><span class="line">INFO  [alembic.runtime.migration] Running upgrade e517276bb1c2 -&gt; 780739b227a7, posts table</span><br></pre></td></tr></table></figure>
+
+<p>如果你对项目使用了版本控制，记得将新的迁移脚本添加进去并提交。</p>
+<h2 id="表演时刻"><a href="#表演时刻" class="headerlink" title="表演时刻"></a>表演时刻</h2><p>经历了一个漫长的过程来定义数据库，我却还没向你展示它们如何使用。 由于应用还没有任何数据库逻辑，所以让我们在Python解释器中来使用以便熟悉它。 立即运行<code>python</code>命令来启动Python（在启动解释器之前，确保您的虚拟环境已被激活）.</p>
+<p>进入Python交互式环境后，导入数据库实例和模型：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; from app import db</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; from app.models import User, Post</span></span><br></pre></td></tr></table></figure>
+
+<p>开始阶段，创建一个新用户：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u = User(username=<span class="string">'john'</span>, email=<span class="string">'john@example.com'</span>)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; db.session.add(u)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; db.session.commit()</span></span><br></pre></td></tr></table></figure>
+
+<p>对数据库的更改是在会话的上下文中完成的，你可以通过<code>db.session</code>进行访问验证。 允许在会话中累积多个更改，一旦所有更改都被注册，你可以发出一个指令<code>db.session.commit()</code>来以原子方式写入所有更改。 如果在会话执行的任何时候出现错误，调用<code>db.session.rollback()</code>会中止会话并删除存储在其中的所有更改。 要记住的重要一点是，只有在调用<code>db.session.commit()</code>时才会将更改写入数据库。 会话可以保证数据库永远不会处于不一致的状态。</p>
+<p>添加另一个用户：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u = User(username=<span class="string">'susan'</span>, email=<span class="string">'susan@example.com'</span>)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; db.session.add(u)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; db.session.commit()</span></span><br></pre></td></tr></table></figure>
+
+<p>数据库执行返回所有用户的查询：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; users = User.query.all()</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; users</span></span><br><span class="line">[&lt;User john&gt;, &lt;User susan&gt;]</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="keyword">for</span> u <span class="keyword">in</span> users:</span></span><br><span class="line">...     print(u.id, u.username)</span><br><span class="line">...</span><br><span class="line">1 john</span><br><span class="line">2 susan</span><br></pre></td></tr></table></figure>
+
+<p>所有模型都有一个<code>query</code>属性，它是运行数据库查询的入口。 最基本的查询就是返回该类的所有元素，它被适当地命名为<code>all()</code>。 请注意，添加这些用户时，它们的<code>id</code>字段依次自动设置为1和2。</p>
+<p>另外一种查询方式是，如果你知道用户的<code>id</code>，可以用以下方式直接获取用户实例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u = User.query.get(1)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u</span></span><br><span class="line">&lt;User john&gt;</span><br></pre></td></tr></table></figure>
+
+<p>现在添加一条用户动态：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u = User.query.get(1)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; p = Post(body=<span class="string">'my first post!'</span>, author=u)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; db.session.add(p)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; db.session.commit()</span></span><br></pre></td></tr></table></figure>
+
+<p>我不需要为<code>timestamp</code>字段设置一个值，因为这个字段有一个默认值，你可以在模型定义中看到。 那么<code>user_id</code>字段呢？ 回想一下，我在<code>User</code>类中创建的<code>db.relationship</code>为用户添加了<code>posts</code>属性，并为用户动态添加了<code>author</code>属性。 我使用<code>author</code>虚拟字段来调用其作者，而不必通过用户ID来处理。 SQLAlchemy在这方面非常出色，因为它提供了对关系和外键的高级抽象。</p>
+<p>为了完成演示，让我们看看另外的数据库查询案例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="comment"># get all posts written by a user</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u = User.query.get(1)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u</span></span><br><span class="line">&lt;User john&gt;</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; posts = u.posts.all()</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; posts</span></span><br><span class="line">[&lt;Post my first post!&gt;]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="comment"># same, but with a user that has no posts</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u = User.query.get(2)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u</span></span><br><span class="line">&lt;User susan&gt;</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; u.posts.all()</span></span><br><span class="line">[]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="comment"># print post author and body for all posts </span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; posts = Post.query.all()</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="keyword">for</span> p <span class="keyword">in</span> posts:</span></span><br><span class="line">...     print(p.id, p.author.username, p.body)</span><br><span class="line">...</span><br><span class="line">1 john my first post!</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> get all users <span class="keyword">in</span> reverse alphabetical order</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; User.query.order_by(User.username.desc()).all()</span></span><br><span class="line">[&lt;User susan&gt;, &lt;User john&gt;]</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://packages.python.org/Flask-SQLAlchemy/index.html" target="_blank" rel="noopener">Flask-SQLAlchemy</a>文档是学习其对应操作的最好去处。</p>
+<p>学完本节内容，我们需要清除这些测试用户和用户动态，以便保持数据整洁和为下一章做好准备：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; users = User.query.all()</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="keyword">for</span> u <span class="keyword">in</span> users:</span></span><br><span class="line">...     db.session.delete(u)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; posts = Post.query.all()</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="keyword">for</span> p <span class="keyword">in</span> posts:</span></span><br><span class="line">...     db.session.delete(p)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; db.session.commit()</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Shell上下文"><a href="#Shell上下文" class="headerlink" title="Shell上下文"></a>Shell上下文</h2><p>还记得上一节的启动Python解释器之后你做过什么吗？第一件事是运行两条导入语句：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> app <span class="keyword">import</span> db</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> app.models <span class="keyword">import</span> User, Post</span><br></pre></td></tr></table></figure>
+
+<p>开发应用时，你经常会在Python shell中测试，所以每次重复上面的导入都会变得枯燥乏味。 <code>flask shell</code>命令是<code>flask</code>命令集中的另一个非常有用的工具。 <code>shell</code>命令是Flask在继<code>run</code>之后的实现第二个“核心”命令。 这个命令的目的是在应用的上下文中启动一个Python解释器。 这意味着什么？ 看下面的例子：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; app</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">NameError: name 'app' is not defined</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;</span></span><br><span class="line"></span><br><span class="line">(venv) $ flask shell</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; app</span></span><br><span class="line">&lt;Flask 'app'&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用常规的解释器会话时，除非明确地被导入，否则<code>app</code>对象是未知的，但是当使用<code>flask shell</code>时，该命令预先导入应用实例。 <code>flask shell</code>的绝妙之处不在于它预先导入了<code>app</code>，而是你可以配置一个“shell上下文”，也就是可以预先导入一份对象列表。</p>
+<p>在<em>microblog.py</em>中实现一个函数，它通过添加数据库实例和模型来创建了一个shell上下文环境：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> app, db</span><br><span class="line"><span class="keyword">from</span> app.models <span class="keyword">import</span> User, Post</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.shell_context_processor</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_shell_context</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">'db'</span>: db, <span class="string">'User'</span>: User, <span class="string">'Post'</span>: Post&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>app.shell_context_processor</code>装饰器将该函数注册为一个shell上下文函数。 当<code>flask shell</code>命令运行时，它会调用这个函数并在shell会话中注册它返回的项目。 函数返回一个字典而不是一个列表，原因是对于每个项目，你必须通过字典的键提供一个名称以便在shell中被调用。</p>
+<p>在添加shell上下文处理器函数后，你无需导入就可以使用数据库实例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ flask shell</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; db</span></span><br><span class="line">&lt;SQLAlchemy engine=sqlite:////Users/migu7781/Documents/dev/flask/microblog2/app.db&gt;</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; User</span></span><br><span class="line">&lt;class 'app.models.User'&gt;</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; Post</span></span><br><span class="line">&lt;class 'app.models.Post'&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果运行以上的<code>db</code>, <code>User</code>, <code>Post</code>命令，报 <code>NameError</code>异常，说明 <code>make_shell_context()</code> 没有被Flask注册。最有可能的原因是你的环境变量中没有设定 <code>FLASK_APP=microblog.py</code>。此时你可以回到<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/blob/master/docs/%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9AHello%2C%20World!.md" target="_blank" rel="noopener">第一章</a>复习一下如何设置<code>FLASK_APP</code>环境变量。如果你经常忘记在新开终端时设置该环境变量，可以如<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/blob/master/docs/%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9AHello%2C%20World!.md" target="_blank" rel="noopener">第一章</a>末尾处那样，在项目的根目录添加一个名为 <code>.flaskenv</code> 的文件，并将环境变量设置在里面。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+		
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/Python-Flask/" rel="tag"><i class="fa fa-tag"></i> Python-Flask</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/07/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(3)/" rel="next" title="Flask基础到高级(3)">
+                <i class="fa fa-chevron-left"></i> Flask基础到高级(3)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/20/python%E6%95%99%E7%A8%8B(1)/" rel="prev" title="python基础教程(1)">
+                python基础教程(1) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" style="border-radius: 50%;" itemprop="image"
+                src="/images/EnderMan.jpg"
+                alt="Empty2081" />
+            
+              <p class="site-author-name" itemprop="name">Empty2081</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+            <span class="site-state-item-name">孤独才是人类应该有的样子</span><br><br>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?uin=2845109623" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/playlist?id=620803502&userid=352713422" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-music"></i>网易云音乐</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+<div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=516182214&auto=1&height=32"></iframe>
+</div>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask中的数据库"><span class="nav-number">1.</span> <span class="nav-text">Flask中的数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库迁移"><span class="nav-number">2.</span> <span class="nav-text">数据库迁移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask-SQLAlchemy配置"><span class="nav-number">3.</span> <span class="nav-text">Flask-SQLAlchemy配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库模型"><span class="nav-number">4.</span> <span class="nav-text">数据库模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建数据库迁移存储库"><span class="nav-number">5.</span> <span class="nav-text">创建数据库迁移存储库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一次数据库迁移"><span class="nav-number">6.</span> <span class="nav-text">第一次数据库迁移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库升级和降级流程"><span class="nav-number">7.</span> <span class="nav-text">数据库升级和降级流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库关系"><span class="nav-number">8.</span> <span class="nav-text">数据库关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表演时刻"><span class="nav-number">9.</span> <span class="nav-text">表演时刻</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell上下文"><span class="nav-number">10.</span> <span class="nav-text">Shell上下文</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Empty2081</span>
+
+  
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

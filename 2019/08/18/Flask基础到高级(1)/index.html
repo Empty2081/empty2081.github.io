@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-cn,en,default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,Python-Flask," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="The-Flask-Mega-Tutorial-zh 中文翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask基础到高级(1)">
+<meta property="og:url" content="http://118.24.110.138/2019/08/18/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(1)/index.html">
+<meta property="og:site_name" content="Empty2081 Blog">
+<meta property="og:description" content="The-Flask-Mega-Tutorial-zh 中文翻译">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4961528-328651893e709b13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2019-08-18T05:52:54.000Z">
+<meta property="article:modified_time" content="2019-10-21T13:39:56.000Z">
+<meta property="article:author" content="Empty2081">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Python-Flask">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4961528-328651893e709b13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://118.24.110.138/2019/08/18/Flask基础到高级(1)/"/>
+
+
+
+
+
+  <title>Flask基础到高级(1) | Empty2081 Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Empty2081 Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://118.24.110.138/2019/08/18/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(1)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empty2081">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/EnderMan.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Empty2081 Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flask基础到高级(1)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-18T13:52:54+08:00">
+                2019-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python3/" itemprop="url" rel="index">
+                    <span itemprop="name">Python3</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <!--<span class="post-meta-item-text">Words count in article&#58;</span>-->
+                  <span class="post-meta-item-text">本篇共 &#58;</span>
+                
+                <!--<span title="Words count in article">-->
+                <span>
+                  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <!--<span class="post-meta-item-text">Reading time &asymp;</span>-->
+                  <span class="post-meta-item-text">预计阅读 &asymp;</span>
+                
+                <!--<span title="Reading time">-->
+                <span>
+                  分钟
+                </span>
+              
+            </div>
+          
+
+          <!--
+              <div class="post-description">
+                  The-Flask-Mega-Tutorial-zh 中文翻译
+              </div<
+          -->
+          
+	          <div class="post-description">
+	        	<div style="font-size:12px;" id="hitokoto"></div>
+	        	<i style="margin: auto auto auto 30%;font-size:11px;" id="hitofrom"></i>
+	          </div>
+			  <script>
+			  fetch('https://v1.hitokoto.cn')
+				.then(function(res) {
+				  return res.json();
+				})
+				.then(function (data){
+				  var hitokoto = document.getElementById("hitokoto");
+				  hitokoto.innerText = data.hitokoto;
+				  var hitofrom = document.getElementById("hitofrom");
+				  hitofrom.innerText = "--" + data.from;
+				})
+			  </script>
+			
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+    
+      
+      
+
+      
+        <hr>
+<p><a href="https://dormousehole.readthedocs.io/en/latest/" target="_blank" rel="noopener">Flask官方中文文档</a><br>此文章摘自github,<a href="https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh/tree/master/docs" target="_blank" rel="noopener">luhuisicnu</a></p>
+<p>本文翻译自<a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_blank" rel="noopener">The Flask Mega-Tutorial Part I: Hello, World!</a></p>
+<p>一趟愉快的学习之旅即将开始，跟随它你将学会用<a href="https://python.org/" target="_blank" rel="noopener">Python</a>和<a href="http://flask.pocoo.org/" target="_blank" rel="noopener">Flask</a>来创建Web应用。上面的视频包含了整个教程的内容预览（译者注：视频见原文）。通过学习本章内容，你将学会如何创建一个Flask项目，并在自己的电脑上运行一个简单的Flask Web应用。</p>
+<p>教程中所有的代码示例都托管在GitHub上。虽然直接从GitHub下载代码可以节省写代码的步骤，但是我强烈建议你至少在前几章自己动手书写这些代码。一旦你熟悉了Flask和示例应用，一些繁琐重复的代码就可以直接从GitHub复制了。</p>
+<p>在每章的开头，我都将提供三个GitHub的链接来帮助你顺畅地学习本章的内容。点击<strong>Browse</strong>链接会打开GitHub上Microblog项目在本章的对应代码库页面，不会包含之后章节的任何新增代码。而<strong>Zip</strong>链接则提供了这份代码库的zip打包文件的下载地址。如果点击<strong>Diff</strong>链接，打开的将会是本章节的代码变更信息。</p>
+<p><em>本章的GitHub链接为: <a href="https://github.com/miguelgrinberg/microblog/tree/v0.1" target="_blank" rel="noopener">Browse</a>, <a href="https://github.com/miguelgrinberg/microblog/archive/v0.1.zip" target="_blank" rel="noopener">Zip</a>, <a href="https://github.com/miguelgrinberg/microblog/compare/v0.0...v0.1" target="_blank" rel="noopener">Diff</a>.</em></p>
+<h2 id="安装Python"><a href="#安装Python" class="headerlink" title="安装Python"></a>安装Python</h2><p>你说你还没有安装Python？那还等什么！立马安装吧。如果操作系统默认没有提供Python安装包，可以从<a href="http://python.org/download/" target="_blank" rel="noopener">Python官方网站</a>下载。如果你使用Microsoft Windows操作系统并且打算使用WSL或者Cygwin，需要注意，不要在上面使用Windows版本的Python，而要使用类Unix版本，比如从Ubuntu获取（对应WSL）或从Cygwin上获取。</p>
+<p>为了验证Python是否正确安装，你可以打开一个终端窗口并输入<code>python3</code>（如果不存在这个命令，那就输入<code>python</code>）。预期的输出如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> python3</span></span><br><span class="line">Python 3.5.2 (default, Nov 17 2016, 17:05:23)</span><br><span class="line">[GCC 5.4.0 20160609] on linux</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; _</span></span><br></pre></td></tr></table></figure>
+<p>Python解释器中，光标不断闪烁，等待着你输入Python语句。在未来的章节中，你可以充分体会到交互式解释器的魅力。至少现在它能够帮你确认Python已经成功安装的事实。可以输入<code>exit()</code>并回车来退出交互式解释器。在Linux和Mac OS X操作系统上，按下快捷键Ctrl-D也可以快速退出交互式解释器。在Windows操作系统上，则是通过按下Ctrl-Z后跟上Enter快捷键来快速退出。</p>
+<h2 id="安装Flask"><a href="#安装Flask" class="headerlink" title="安装Flask"></a>安装Flask</h2><p>下一步开始安装Flask，在这之前我要告诉你安装Python三方包的最佳实践。</p>
+<p>Python将所有三方包托管到一个公共仓库，任何人都能从这个公共仓库下载并安装所有的三方包。Python将三方包公共仓库命名为<a href="https://pypi.python.org/pypi" target="_blank" rel="noopener">PyPI</a>以表示Python Package Index的缩写(被一些人戏称为”cheese shop”)。从PyPI上安装三方包非常简单，Python专门提供了一个名为<code>pip</code>的工具来解决这个问题（Python2.7中不含<code>pip</code>工具，需要单独安装）。</p>
+<p>安装三方包时，使用<code>pip</code>命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> pip install &lt;package-name&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有趣的是，这个方法在大多数情况下不适用。假如Python解释器是全局安装的，所有用户都能使用，那么普通用户则没有权限来修改它，因此只能用管理员账户来执行安装操作。即使忽略操作的复杂性，使用这种全局安装的方式会发生什么？<code>pip</code>工具从PyPI上下载三方包并安装到全局Python目录下，即刻起，所有Python脚本都可以访问到这个三方包。想象这样一个场景，你之前用当时的最新版本Flask——0.11版本的Flask开发了一个Web应用，现在Flask已经更新到了0.12版本，你想要使用0.12版本的Flask开发第二个Web应用。但是，如果将Flask从0.11版本升级到0.12版本可能会导致第一个Web应用出现故障。解决这个问题的方法最好不过为旧Web应用安装和使用Flask0.11版本，为新Web应用安装和使用Flask0.12版本。</p>
+<p>为了解决维护不同应用程序对应不同版本的问题，Python使用了<em>虚拟环境</em>的概念。 虚拟环境是Python解释器的完整副本。在虚拟环境中安装三方包时只会作用到虚拟环境，全局Python解释器不受影响。 那么，就为每个应用程序安装各自的虚拟环境吧。 虚拟环境还有一个好处，即它们由创建它们的用户所拥有，所以不需要管理员帐户。</p>
+<p>我们先创建项目目录，我将这个应用命名为<em>microblog</em>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir microblog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> microblog</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你正在使用Python3，虚拟环境已经成为内置模块，可以直接通过如下命令来创建它：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> python3 -m venv venv</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>译者注：这个命令不一定能够执行成功，比如译者在Ubuntu16.04环境下执行，提示需要先安装对应的依赖。<code>sudo apt-get install python3-venv</code></p>
+</blockquote>
+<p>使用这个命令来让Python运行<code>venv</code>包，它会创建一个名为<code>venv</code>的虚拟环境。 命令中的第一个“venv”是Python虚拟环境包的名称，第二个是要用于这个特定环境的虚拟环境名称。 如果你觉得这样很混乱，可以用你自定义的虚拟环境名字替换第二个<code>venv</code>。我习惯在项目目录中创建了名为<code>venv</code>的虚拟环境，所以无论何时<code>cd</code>到一个项目中，都会找到相应的虚拟环境。</p>
+<p>请注意，在一些操作系统中，你可能需要在上面的命令中使用<code>python</code>而不是<code>python3</code>。 一些安装规范对Python 2.x版本使用<code>python</code>，对3.x版本使用<code>python3</code>，而另一些则将<code>python</code>映射到3.x版本。</p>
+<p>命令执行完成后，当前目录下就会新增一个名为<code>venv</code>的目录来存储这个虚拟环境的相关文件。</p>
+<p>如果你使用的Python版本低于3.4（包括2.7版本），则不会默认支持虚拟环境。 对于这些版本的Python，在创建虚拟环境之前，需要下载并安装称为<a href="https://virtualenv.pypa.io/" target="_blank" rel="noopener">virtualenv</a>的第三方工具。 一旦安装了virtualenv，你可以使用以下命令创建一个虚拟环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> virtualenv venv</span></span><br></pre></td></tr></table></figure>
+
+<p>不管你用什么方法创建虚拟环境，创建完毕之后还需要激活才能够进入这个虚拟环境。 要激活你的全新虚拟环境，需使用以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> venv/bin/activate</span></span><br><span class="line">(venv) $ _</span><br></pre></td></tr></table></figure>
+
+<p>如果你使用的是Microsoft Windows命令提示符窗口，则激活命令稍有不同：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> venv\Scripts\activate</span></span><br><span class="line">(venv) $ _</span><br></pre></td></tr></table></figure>
+
+<p>激活一个虚拟环境，终端会话的环境配置就会被修改，之后你键入<code>python</code>的时候，实际上是调用的虚拟环境中的Python解释器。 此外，终端提示符也被修改成包含被激活的虚拟环境的名称的格式。这种激活是临时的和私有的，因此在关闭终端窗口时它们将不会保留，也不会影响其他的会话。 那么，当你需要同时打开多个终端窗口来调试不同的应用时，每个终端窗口都可以激活不同的虚拟环境而不会相互影响。</p>
+<p>成功创建和激活了虚拟环境之后，你可以安装Flask了，命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip install flask</span><br></pre></td></tr></table></figure>
+
+<p>想要验证安装是否成功，可以打开Python解释器，并用<em>import</em>语句来导入它：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import flask</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; _</span></span><br></pre></td></tr></table></figure>
+
+<p>如果语句没有报错，那么恭喜你，Flask安装成功了！</p>
+<h2 id="“Hello-World”-Flask应用"><a href="#“Hello-World”-Flask应用" class="headerlink" title="“Hello, World” Flask应用"></a>“Hello, World” Flask应用</h2><p><a href="http://flask.pocoo.org/" target="_blank" rel="noopener">Flask网站</a>展示了一个仅有五行代码的简单示例应用程序。 而我会告诉你一个稍微更复杂的例子，它将为你编写更大的应用程序提供一个很好的基础结构。</p>
+<p>应用程序是存在于<em>包</em>中的。 在Python中，包含<code>__init__.py</code>文件的子目录被视为一个可导入的包。 当你导入一个包时，<code>__init__.py</code>会执行并定义这个包暴露给外界的属性。</p>
+<p>那就创建一个名为<code>app</code>的包来存放整个应用吧。记得切换到<em>microblog</em>目录下，并执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ mkdir app</span><br></pre></td></tr></table></figure>
+
+<p>并在其下创建文件<code>__init__.py</code>，输入如下的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> routes</span><br></pre></td></tr></table></figure>
+
+<p>上面的脚本仅仅是从flask中导入的类<code>Flask</code>，并以此类创建了一个应用程序对象。 传递给<code>Flask</code>类的<code>__name__</code>变量是一个Python预定义的变量，它表示当前调用它的模块的名字。当需要加载相关的资源，如我将在<a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ii-templates" target="_blank" rel="noopener">第二章</a>讲到的模板文件，Flask就使用这个位置作为起点来计算绝对路径。 代码的最后，应用程序导入尚未存在的<code>routes</code>模块。</p>
+<p>这段代码，乍一看可能会让人迷惑。</p>
+<p>其一，这里有两个实体名为<code>app</code>。 <code>app</code>包由<em>app</em>目录和<code>__init__.py</code>脚本来定义构成，并在<code>from app import routes</code>语句中被引用。 <code>app</code>变量被定义为<code>__init__.py</code>脚本中的<code>Flask</code>类的一个实例，以至于它成为<code>app</code>包的属性。</p>
+<p>其二，<code>routes</code>模块是在底部导入的，而不是在脚本的顶部。 最下面的导入是解决<em>循环导入</em>的问题，这是Flask应用程序的常见问题。 你将会看到<code>routes</code>模块需要导入在这个脚本中定义的<code>app</code>变量，因此将<code>routes</code>的导入放在底部可以避免由于这两个文件之间的相互引用而导致的错误。</p>
+<p>那么在<code>routes</code>模块中有些什么？ 路由是应用程序实现的不同URL。 在Flask中，应用程序路由的处理逻辑被编写为Python函数，称为<em>视图函数</em>。 视图函数被映射到一个或多个路由URL，以便Flask知道当客户端请求给定的URL时执行什么逻辑。</p>
+<p>这是需要写入到<em>app/routes.py</em>中的第一个视图函数的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> app</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="meta">@app.route('/index')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello, World!"</span></span><br></pre></td></tr></table></figure>
+
+<p>这个视图函数简单到只返回一个字符串作为问候用语。 函数上面的两个奇怪的<code>＠app.route</code>行是<em>装饰器</em>，这是Python语言的一个独特功能。 装饰器会修改跟在其后的函数。 装饰器的常见模式是使用它们将函数注册为某些事件的回调函数。 在这种情况下，<code>＠app.route</code>修饰器在作为参数给出的URL和函数之间创建一个关联。 在这个例子中，有两个装饰器，它们将URL <code>/</code>和<code>/index</code>索引关联到这个函数。 这意味着，当Web浏览器请求这两个URL中的任何一个时，Flask将调用该函数并将其返回值作为响应传递回浏览器。这样做是为了在运行这个应用程序的时候会稍微有一点点意义。</p>
+<p>要完成应用程序，你需要在定义Flask应用程序实例的顶层（译者注：也就是microblog目录下）创建一个命名为<em>microblog.py</em>的Python脚本。 它仅拥有一个导入应用程序实例的行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> app</span><br></pre></td></tr></table></figure>
+
+<p>还记得两个<code>app</code>实体吗？ 在这里，你可以在同一句话中看到两者。 Flask应用程序实例被称为<code>app</code>，是<code>app</code>包的成员。<code>from app import app</code>语句从<code>app</code>包导入其成员<code>app</code>变量。 如果你觉得这很混乱，你可以重命名包或者变量。</p>
+<p>只要确保所做的操作完全正确，那么你就可以看到如下面的项目结构图：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">microblog&#x2F;</span><br><span class="line">  venv&#x2F;</span><br><span class="line">  app&#x2F;</span><br><span class="line">    __init__.py</span><br><span class="line">    routes.py</span><br><span class="line">  microblog.py</span><br></pre></td></tr></table></figure>
+
+<p>不管你信不信，这个应用的第一个版本现在完成了！ 但是在运行之前，需要通过设置<code>FLASK_APP</code>环境变量告诉Flask如何导入它：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ export FLASK_APP=microblog.py</span><br></pre></td></tr></table></figure>
+
+<p>如果你使用Microsoft Windows操作系统，在上面的命令中使用<code>set</code>替换<code>export</code>。</p>
+<p>万事俱备，只欠东风！运行如下命令来运行你的第一个Web应用吧：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ flask run</span><br><span class="line"> * Serving Flask app "microblog"</span><br><span class="line"> * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)</span><br></pre></td></tr></table></figure>
+
+<p>服务启动后将处于阻塞监听状态，将等待客户端连接。 <code>flask run</code>的输出表明服务器正在运行在IP地址127.0.0.1上，这是本机的回环IP地址。 这个地址很常见，并有一个更简单的名字，你可能已经看过：<em>localhost</em>。 网络服务器监听在指定端口号等待连接。 部署在生产Web服务器上的应用程序通常会在端口443上进行监听，如果不执行加密，则有时会监听80，但启用这些端口需要root权限。 由于此应用程序在开发环境中运行，因此Flask使用自由端口5000。 现在打开您的网络浏览器并在地址栏中输入以下URL：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost:5000&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>或者，你也可以使用另一个URL：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost:5000&#x2F;index</span><br></pre></td></tr></table></figure>
+
+<p>应用程序路由映射执行了吗？ 第一个URL映射到<code>/</code>，而第二个映射到<code>/ index</code>。 这两个路由都与应用程序中唯一的视图函数相关联，所以它们产生相同的输出，即函数返回的字符串。 如果你输入任何其他网址，则会出现错误，因为只有这两个URL被应用程序识别。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4961528-328651893e709b13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Hello, World!"></p>
+<p>完成演示之后，你可以按下Ctrl-C来停止Web服务。</p>
+<p>真是可喜可贺！你已经成功地向成为一名Web开发者的道路上迈出了重要的第一步！</p>
+<p>在结束本章节之前，我想提醒一下你，在终端会话中直接设置的环境变量不会永久生效，因此你不得不在每次新开终端时设定 <code>FLASK_APP</code> 环境变量，从 1.0 版本开始，Flask 允许你设置只会在运行<code>flask</code>命令时自动注册生效的环境变量，要实现这点，你需要安装 <code>python-dotenv</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip install python-dotenv</span><br></pre></td></tr></table></figure>
+
+<p>此时，在项目的根目录下新建一个名为 <code>.flaskenv</code> 的文件，其内容是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLASK_APP=microblog.py</span><br></pre></td></tr></table></figure>
+
+<p>通过此项设置，<code>FLASK_APP</code>就可以自动加载了，如果你钟爱手动设定环境变量，那也不错，只是记得每次启动终端后要设定它。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+		
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/Python-Flask/" rel="tag"><i class="fa fa-tag"></i> Python-Flask</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/17/hello/" rel="next" title="hello">
+                <i class="fa fa-chevron-left"></i> hello
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/19/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(2)/" rel="prev" title="Flask基础到高级(2)">
+                Flask基础到高级(2) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" style="border-radius: 50%;" itemprop="image"
+                src="/images/EnderMan.jpg"
+                alt="Empty2081" />
+            
+              <p class="site-author-name" itemprop="name">Empty2081</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+            <span class="site-state-item-name">孤独才是人类应该有的样子</span><br><br>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?uin=2845109623" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/playlist?id=620803502&userid=352713422" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-music"></i>网易云音乐</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+<div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=516182214&auto=1&height=32"></iframe>
+</div>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Python"><span class="nav-number">1.</span> <span class="nav-text">安装Python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Flask"><span class="nav-number">2.</span> <span class="nav-text">安装Flask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“Hello-World”-Flask应用"><span class="nav-number">3.</span> <span class="nav-text">“Hello, World” Flask应用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Empty2081</span>
+
+  
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
