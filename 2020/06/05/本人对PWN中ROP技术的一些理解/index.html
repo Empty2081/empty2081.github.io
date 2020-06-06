@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Python," />
+  <meta name="keywords" content="pwn,python,linux," />
 
 
 
@@ -86,17 +86,19 @@
 
 
 
-<meta name="description" content="Python 基础教程">
+<meta name="description" content="本人对PWN中ROP技术的一些理解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python基础教程(1)">
-<meta property="og:url" content="http://118.24.110.138/2020/01/20/python%E6%95%99%E7%A8%8B(1)/index.html">
+<meta property="og:title" content="本人对PWN中ROP技术的一些理解">
+<meta property="og:url" content="http://118.24.110.138/2020/06/05/%E6%9C%AC%E4%BA%BA%E5%AF%B9PWN%E4%B8%ADROP%E6%8A%80%E6%9C%AF%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Empty2081 Blog">
-<meta property="og:description" content="Python 基础教程">
+<meta property="og:description" content="本人对PWN中ROP技术的一些理解">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-20T02:05:07.000Z">
-<meta property="article:modified_time" content="2020-01-20T02:07:09.000Z">
+<meta property="article:published_time" content="2020-06-05T07:14:27.000Z">
+<meta property="article:modified_time" content="2020-06-05T12:26:25.329Z">
 <meta property="article:author" content="Empty2081">
-<meta property="article:tag" content="Python">
+<meta property="article:tag" content="pwn">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 
 
@@ -127,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://118.24.110.138/2020/01/20/python教程(1)/"/>
+  <link rel="canonical" href="http://118.24.110.138/2020/06/05/本人对PWN中ROP技术的一些理解/"/>
 
 
 
 
 
-  <title>python基础教程(1) | Empty2081 Blog</title>
+  <title>本人对PWN中ROP技术的一些理解 | Empty2081 Blog</title>
   
 
 
@@ -270,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://118.24.110.138/2020/01/20/python%E6%95%99%E7%A8%8B(1)/">
+    <link itemprop="mainEntityOfPage" href="http://118.24.110.138/2020/06/05/%E6%9C%AC%E4%BA%BA%E5%AF%B9PWN%E4%B8%ADROP%E6%8A%80%E6%9C%AF%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Empty2081">
@@ -287,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python基础教程(1)</h1>
+          <h1 class="post-title" itemprop="name headline">本人对PWN中ROP技术的一些理解</h1>
         
 
         <div class="post-meta">
@@ -299,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-20T10:05:07+08:00">
-                2020-01-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-05T15:14:27+08:00">
+                2020-06-05
               </time>
             
 
@@ -322,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python3/" itemprop="url" rel="index">
-                    <span itemprop="name">Python3</span>
+                  <a href="/categories/pwn/" itemprop="url" rel="index">
+                    <span itemprop="name">pwn</span>
                   </a>
                 </span>
 
@@ -355,7 +357,7 @@
                 
                 <!--<span title="Words count in article">-->
                 <span>
-                  623字
+                  168字
                 </span>
               
 
@@ -373,7 +375,7 @@
                 
                 <!--<span title="Reading time">-->
                 <span>
-                  2分钟
+                  1分钟
                 </span>
               
             </div>
@@ -381,7 +383,7 @@
 
           <!--
               <div class="post-description">
-                  Python 基础教程
+                  本人对PWN中ROP技术的一些理解
               </div<
           -->
           
@@ -415,34 +417,111 @@
       
 
       
-        <h1 id="Python-基础教程-1"><a href="#Python-基础教程-1" class="headerlink" title="Python 基础教程(1)"></a>Python 基础教程(1)</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>和其他的大多数语言一样, Python也有数据类型, 需要注意的是Python是一门动态强类型的编程语言.</p>
-<p>动态：不使用显示数据类型声明，且确定一个变量的类型由初始化的值确定其类型。</p>
-<p>强类型：不允许不同类型相加。例如：整形+字符串会报类型错误。</p>
-<p>int( 整型 ), float( 浮点数 ), str( 字符串 ), bool( 布尔值 ), list( 列表 ), dict( 字典 ), tuple( 元组 ). ( 暂不谈set类型 )</p>
-<p>以上的数据类型很好理解, 需要注意的是元组类型类似C语言的常数, 一经定义不可修改.</p>
-<h2 id="常见语法"><a href="#常见语法" class="headerlink" title="常见语法"></a>常见语法</h2><h3 id="语法块"><a href="#语法块" class="headerlink" title="语法块"></a>语法块</h3><p>python中语法块是由制表符或者空格来控制的, 如下:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Hello_World</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello World"</span></span><br><span class="line"></span><br><span class="line">print(Hello_World())</span><br></pre></td></tr></table></figure>
+        <h1 id="本人对ROP技术的理解"><a href="#本人对ROP技术的理解" class="headerlink" title="本人对ROP技术的理解"></a>本人对ROP技术的理解</h1><table>
+    <thead>
+        <tr>
+            <th style="min-width: 150px;text-align: center;">地址</th>
+            <th style="min-width: 100px; text-align: center;">数据</th>
+            <th style="min-width: 100px; text-align: center;">备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0x40000000</td>
+            <td>0x76E86D13</td>
+            <td>ESP</td>
+        </tr>
+        <tr>
+            <td>.........</td>
+            <td>.........</td>
+            <td>其他数据</td>
+        </tr>
+        <tr>
+            <td>0x40001000</td>
+            <td>0x76E87D13</td>
+            <td>EBP</td>
+        </tr>
+        <tr>
+            <td>0x40000000</td>
+            <td>0x76E86D13</td>
+            <td>EIP</td>
+        </tr>
+        <tr>
+            <td>0x40000000</td>
+            <td>0x76E86D13</td>
+            <td>ESP</td>
+        </tr>
+        <tr>
+            <td>.........</td>
+            <td>.........</td>
+            <td>其他数据</td>
+        </tr>
+        <tr>
+            <td>0x40001000</td>
+            <td>0x76E87D13</td>
+            <td>EBP</td>
+        </tr>
+    </tbody>
+</table>
 
-<p>其中Hello_World可以看作一个代码块, 属于这个代码块的代码均以4个空格开始( 也可以用一个或者两个, 但是要保证整个脚本运行过程中统一为一个或者两个空位为起始 ), Python中只要有子语句(函数), 就需要想这样来输出制表符或者空格.</p>
-<h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><p>if语法在python中表示方法如下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 表达式:</span><br><span class="line">    表达式为<span class="literal">True</span>或<span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    表达式为<span class="literal">False</span>或<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>一个正常的栈区的数据如上(一般来说在EBP前会有一个CANARY值，用于验证是否存在溢出数据)</p>
+<p>当ROP攻击后，下面是栈区中的数据状态</p>
+<table>
+    <thead>
+        <tr>
+            <th style="min-width: 150px;text-align: center;">地址</th>
+            <th style="min-width: 100px; text-align: center;">数据</th>
+            <th style="min-width: 100px; text-align: center;">备注</th>
+            <th style="min-width: 100px; text-align: center;">现状态</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0x40000000</td>
+            <td>0x76E86D13</td>
+            <td>ESP</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>.........</td>
+            <td>.........</td>
+            <td>其他数据</td>
+            <td>输入的数据</td>
+        </tr>
+        <tr>
+            <td>0x40001000</td>
+            <td>0x76E87D13</td>
+            <td>EBP</td>
+            <td>输入的数据</td>
+        </tr>
+        <tr>
+            <td>0x40001004</td>
+            <td>0x76E86D13</td>
+            <td>EIP</td>
+            <td>POP|RET地址</td>
+        </tr>
+        <tr>
+            <td>0x40000000</td>
+            <td>0x76E86D13</td>
+            <td>ESP</td>
+            <td>'/bin/bash'字符的地址</td>
+        </tr>
+        <tr>
+            <td>.........</td>
+            <td>.........</td>
+            <td>其他数据</td>
+            <td>system函数地址</td>
+        </tr>
+        <tr>
+            <td>0x40001000</td>
+            <td>0x76E87D13</td>
+            <td>EBP</td>
+            <td>无视剩下的数据(已被溢出，数据不完整)</td>
+        </tr>
+    </tbody>
+</table>
 
-<p>很简单, 需要注意的是有时其他脚本中会把if中的else if 分支简写为elif, 如:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lang = <span class="string">"python"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> lang == <span class="string">"python"</span>:</span><br><span class="line">    print(<span class="string">"print('Hello World')"</span>)</span><br><span class="line"><span class="keyword">elif</span> lang == <span class="string">"C++"</span>:</span><br><span class="line">    print(<span class="string">"cout &lt;&lt; 'Hello World' &lt;&lt; endl;"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><p>for语句在python里我喜欢把他叫做遍历而不是循环(个人观点), for语法如下:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">50</span>): <span class="comment"># range(50) 创建一个从0到49, 大小为50的列表</span></span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
-
-<p>for的取值可以从列表内, 可以从函数返回值( 生成器 ), 来获得某个值</p>
-<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><p>while 是python中的循环, 和其他语言语法及作用大致一致, 表达式为真执行while语法块内的语句, 为假则跳出.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    print(<span class="string">"I Like Python"</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>在python中, 函数的定义语句为def, 且无需定义返回类型, 你想返回什么类型都行, 由返回值的类型来确定函数的返回类型.</p>
-<p>函数的定义语句如下:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">I_Like_Python</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">I_Will_Always_Like</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"穗积"</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h2><p>Python很简单, 语法如此, 程序也如此, 就像玩积木一样, 每个模块很简单, 但拼凑在一起后就会变得很复杂, 这一切取决于你.</p>
-
+<h2 id="实验一下"><a href="#实验一下" class="headerlink" title="实验一下"></a>实验一下</h2>
       
     </div>
     
@@ -467,7 +546,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+            <a href="/tags/pwn/" rel="tag"><i class="fa fa-tag"></i> pwn</a>
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
           
         </div>
       
@@ -480,8 +563,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/19/Flask%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7(4)/" rel="next" title="Flask基础到高级(4)">
-                <i class="fa fa-chevron-left"></i> Flask基础到高级(4)
+              <a href="/2020/01/22/Linux%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" rel="next" title="Linux程序的常用保护机制">
+                <i class="fa fa-chevron-left"></i> Linux程序的常用保护机制
               </a>
             
           </div>
@@ -489,10 +572,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/22/Linux%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" rel="prev" title="Linux程序的常用保护机制">
-                Linux程序的常用保护机制 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -649,7 +728,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-基础教程-1"><span class="nav-number">1.</span> <span class="nav-text">Python 基础教程(1)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见语法"><span class="nav-number">1.2.</span> <span class="nav-text">常见语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法块"><span class="nav-number">1.2.1.</span> <span class="nav-text">语法块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#if"><span class="nav-number">1.2.2.</span> <span class="nav-text">if</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for"><span class="nav-number">1.2.3.</span> <span class="nav-text">for</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while"><span class="nav-number">1.2.4.</span> <span class="nav-text">while</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">1.2.5.</span> <span class="nav-text">函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PS"><span class="nav-number">1.3.</span> <span class="nav-text">PS</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本人对ROP技术的理解"><span class="nav-number">1.</span> <span class="nav-text">本人对ROP技术的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验一下"><span class="nav-number">1.1.</span> <span class="nav-text">实验一下</span></a></li></ol></li></ol></div>
             
 
           </div>
